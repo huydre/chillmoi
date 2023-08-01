@@ -1,7 +1,7 @@
 import './globals.css'
-import { Outfit } from 'next/font/google'
+import { Montserrat } from 'next/font/google'
 
-const outfit = Outfit({
+const montserrat = Montserrat({
   subsets: ['latin'],
   display: 'swap',
 })
@@ -17,7 +17,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${outfit.className} `}>
+    <html lang="en" className={`${montserrat.className} `}>
       <body>
         {children}
       </body>

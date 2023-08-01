@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import SwiperHero from "@/components/Home/SwiperHero";
+import LastestUpdate from "@/components/Home/LastestUpdate";
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
         </header>
         <main>
           <SwiperHero />
+          <LastestUpdate/>
         </main>
         <footer>
           <Footer />

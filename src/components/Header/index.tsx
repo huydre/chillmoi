@@ -6,10 +6,10 @@ import Image from "next/image";
 const Header = () => {
   return (
     <div className="flex justify-between items-center py-4 px-4 w-full">
-      <div>
+      <a href="/">
         {/* <Image width={120} height={50} src="/text-logo.png" alt="" /> */}
-      </div>
-      <div className="flex items-center justify-between space-x-4">
+      </a>
+      <div className="flex items-center justify-between space-x-6">
         <i className="hover:bg-slate-100/20 p-[6px] rounded-full transition duration-300 ease-in-out">
           <IoMdNotifications size="1.5em" />
         </i>
@@ -17,7 +17,7 @@ const Header = () => {
           <FiSearch size="1.5em" />
         </i>
         <div>
-          <button className="ring-2 ring-primary text-md font-semibold px-4 py-1 rounded-lg hover:bg-primary hover:text-black transition duration-200 ease-in-out">
+          <button className="ring-2 ring-primary text-sm font-semibold px-2 py-1 rounded-lg hover:bg-primary hover:text-black transition duration-200 ease-in-out">
             Đăng nhập
           </button>
         </div>

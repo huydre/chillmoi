@@ -6,7 +6,9 @@ const nextConfig = {
     images: {
         domains: [
             "2sao.vietnamnetjsc.vn",
-            "occ-0-2433-590.1.nflxso.net"
+            "occ-0-2433-590.1.nflxso.net",
+            "i.ytimg.com",
+            "thegioidienanh.vn",
         ],
         minimumCacheTTL: 1500000,
     }
