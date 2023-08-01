@@ -6,16 +6,16 @@ import SwiperHero from "@/components/Home/SwiperHero";
 
 export default function Home() {
   return (
-    <div className="flex 2xl:px-[154px]">
+    <div className=" 2xl:px-[154px] flex">
       <nav className="h-full fixed">
         <Navbar />
       </nav>
-      <div className="w-full pl-[74px]">
+      <div className="w-full md:pl-[74px]">
         <header>
           <Header />
         </header>
         <main>
-          <SwiperHero/>
+          <SwiperHero />
         </main>
         <footer>
           <Footer />

@@ -18,12 +18,7 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background: #0E0E10;
 }
 
 h1 {
@@ -34,6 +29,10 @@ h1 {
 h4 {
   font-size: 1.5rem;
   font-weight: 500;
+}
+h5 {
+  font-size: 1.2rem;
+  font-weight: 600;
 }
 
 h6 {

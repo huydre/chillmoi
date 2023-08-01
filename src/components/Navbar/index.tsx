@@ -8,9 +8,9 @@ import { Tooltip } from "@material-tailwind/react";
 
 const Navbar = () => {
   return (
-    <div className=" h-screen sticky flex flex-col space-y-6 px-3 py-4 items-center border-r-2 border-gray-800">
-      <div className="h-20">
-        {/* <Logo /> */}
+    <div className=" h-screen sticky md:flex flex-col space-y-6 px-3 py-4 items-center border-r-2 border-gray-900/30 hidden">
+      <div className="mb-4">
+        <Logo />
       </div>
       <Tooltip content="Trang chủ" placement="right">
         <button className="p-2 rounded-xl transition duration-300 ease-in-out bg-primary">

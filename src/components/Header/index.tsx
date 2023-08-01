@@ -5,7 +5,7 @@ import Image from "next/image";
 
 const Header = () => {
   return (
-    <div className="flex justify-between items-center py-4 px-4 w-full bg-gradient-to-b from-black to-transparent">
+    <div className="flex justify-between items-center py-4 px-4 w-full">
       <div>
         {/* <Image width={120} height={50} src="/text-logo.png" alt="" /> */}
       </div>
@@ -17,7 +17,7 @@ const Header = () => {
           <FiSearch size="1.5em" />
         </i>
         <div>
-          <button className="ring-2 ring-primary text-md font-semibold px-4 py-1 rounded-lg">
+          <button className="ring-2 ring-primary text-md font-semibold px-4 py-1 rounded-lg hover:bg-primary hover:text-black transition duration-200 ease-in-out">
             Đăng nhập
           </button>
         </div>
