@@ -10,11 +10,11 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <div className=" 2xl:px-[154px] flex text-white">
-      <nav className="h-full fixed">
+      <nav className="h-full fixed z-40">
         <Navbar />
       </nav>
       <div className="w-full md:pl-[74px]">
-        <header>
+        <header className="fixed z-30 w-full 2xl:right-[154px] right-0">
           <Header />
         </header>
         {children}

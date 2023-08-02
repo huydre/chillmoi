@@ -14,18 +14,18 @@ const DetailMovie: React.FC<DetailMovieProps> = ({ data }) => {
   return (
     <Layout>
       <div>
-        <div className="relative md:h-[500px] h-[450px] bg-black/40 bg-blend-overlay">
+        <div className="relative md:h-[550px] h-[500px] bg-black/40 bg-blend-overlay">
           <Image
             fill
-            src={` https://image.tmdb.org/t/p/original${data.backdrop_path}`}
+            src={` https://image.tmdb.org/t/p/original${data.backdrop_path}` || `https://image.tmdb.org/t/p/w500${data.backdrop_path}`}
             alt={data.original_title}
             style={{
               objectFit: "cover",
             }}
             className="-z-10 "
           />
-          <div className="mx-[124px] pt-20 space-y-6 max-w-[600px]">
-            <h1 className="line-clamp-2">{data.title}</h1>
+          <div className="mx-[124px] pt-36 space-y-6 max-w-[600px]">
+            <h1 className="line-clamp-2 leading-tight">{data.title}</h1>
             <div className="flex items-center space-x-4">
               <span className="bg-white text-black text-center py-[2px] text-sm font-semibold w-10 rounded-md">
                 {data.release_date.slice(0, 4)}

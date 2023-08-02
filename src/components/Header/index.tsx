@@ -1,11 +1,37 @@
-import React from "react";
+"use client"
+import React, { useEffect, useState } from "react";
 import { FiSearch } from "react-icons/fi";
 import { IoMdNotifications } from "react-icons/io";
 import Image from "next/image";
 
 const Header = () => {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (typeof window !== "undefined") {
+        if (window.scrollY > 0) {
+          setScrolled(true);
+        } else {
+          setScrolled(false);
+        }
+      }
+    };
+
+    if (typeof window !== "undefined") {
+      window.addEventListener("scroll", handleScroll);
+
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+      };
+    }
+  }, []);
   return (
-    <div className="flex justify-between items-center py-4 px-4 w-full">
+    <div
+      className={`flex justify-between items-center py-4 px-4 w-full ${
+        scrolled ? "bg-[#0E0E10]/25 backdrop-blur-sm" : ""
+      }`}
+    >
       <a href="/">
         {/* <Image width={120} height={50} src="/text-logo.png" alt="" /> */}
       </a>

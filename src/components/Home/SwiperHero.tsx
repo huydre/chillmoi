@@ -46,7 +46,7 @@ const SwiperHero = () => {
           }}
           watchSlidesProgress
           modules={[Autoplay, Pagination, Navigation]}
-          className="md:h-[600px] h-[550px]  cursor-grab overflow-hidden"
+          className="md:h-[650px] h-[600px]  cursor-grab overflow-hidden"
         >
           {heroItem.map((i) => (
             <SwiperSlide data-swiper-slide-index={i.index}>
