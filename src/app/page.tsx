@@ -3,11 +3,12 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import SwiperHero from "@/components/Home/SwiperHero";
-import LastestUpdate from "@/components/Home/LastestUpdate";
+import LastestUpdateSection from "@/components/Home/LastestUpdateSection";
+import PopularSection from "@/components/Home/PopularSection";
 
 export default function Home() {
   return (
-    <div className=" 2xl:px-[154px] flex">
+    <div className=" 2xl:px-[154px] flex text-white">
       <nav className="h-full fixed">
         <Navbar />
       </nav>
@@ -17,7 +18,8 @@ export default function Home() {
         </header>
         <main>
           <SwiperHero />
-          <LastestUpdate/>
+          <LastestUpdateSection/>
+          <PopularSection />
         </main>
         <footer>
           <Footer />

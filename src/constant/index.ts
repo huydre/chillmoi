@@ -29,110 +29,81 @@ export const heroItem = [
 ]
 
 
-export const lastestUpdate = [
+export const movieGenres = [
     {
-        index: '1',
-        title: "Dẫu biết",
-        year: "2021",
-        type: "Phim T.Hình",
-        genres: "Lãng mạn",
-        bannerImg: "https://thegioidienanh.vn/stores/news_dataimages/anhvu/072021/20/14/3844_03.jpg?rt=20210720144113",
-        shortDesc: "Dẫu biết là một bộ phim truyền hình Hàn Quốc phát sóng năm 2021, với sự tham gia của Han So-hee, Song Kang và Chae Jong-hyeop",
-        mediaId: "1",
-        userId: "123",
-        updated_at: "1/1/2023",
-        created_at: "1/1/2023",
-        watchedTime: "12h",
-        episodeNumber: "8",
+        "id": 28,
+        "name": "Action"
     },
     {
-        index: '2',
-        title: "Sweet Home: Thế giới ma quái",
-        year: "2020",
-        type: "Phim T.Hình",
-        genres: "Chính kịch",
-        bannerImg: "/sweethome.jpg",
-        shortDesc: "Sweet Home: Thế giới ma quái là bộ phim truyền hình Hàn Quốc ra mắt năm 2020 với sự tham gia của Song Kang, Lee Jin-wook, Lee Do-hyun và Lee Si-young.",
-        mediaId: "1",
-        userId: "123",
-        updated_at: "1/1/2023",
-        created_at: "1/1/2023",
-        watchedTime: "12h",
-        episodeNumber: "8",
+        "id": 12,
+        "name": "Adventure"
     },
     {
-        index: '3',
-        title: "Biệt đội siêu anh hùng: Hồi kết",
-        year: "2019",
-        type: "Phim",
-        genres: "Hành động/Khoa học viễn tưởng",
-        bannerImg: "/avg3.jpg",
-        shortDesc: "Avengers: Hồi kết là phim điện ảnh siêu anh hùng Mỹ ra mắt năm 2019, do Marvel Studios sản xuất và Walt Disney Studios Motion Pictures phân phối độc quyền tại thị trường Bắc Mỹ",
-        mediaId: "1",
-        userId: "123",
-        updated_at: "1/1/2023",
-        created_at: "1/1/2023",
-        watchedTime: "12h",
-        episodeNumber: "8",
+        "id": 16,
+        "name": "Animation"
     },
     {
-        index: '4',
-        title: "Cảnh báo tình yêu",
-        year: "2019",
-        type: "Phim T.Hình",
-        genres: "Lãng mạn",
-        bannerImg: "/love-alarm.jpg",
-        shortDesc: "Love Alarm là một bộ phim truyền hình Hàn Quốc drama dựa trên webtoon Daum cùng tên của Chon Kye-young. Bộ phim có sự tham gia của Kim So-hyun, Jung Ga-ram và Song Kang. Bộ phim được công chiếu trên Netflix vào ngày 22 tháng 8 năm 2019, phần 2 của bộ phim được công chiếu vào đầu năm 2021",
-        mediaId: "1",
-        userId: "123",
-        updated_at: "1/1/2023",
-        created_at: "1/1/2023",
-        watchedTime: "12h",
-        episodeNumber: "8",
+        "id": 35,
+        "name": "Comedy"
     },
     {
-        index: '1',
-        title: "Dẫu biết",
-        year: "2021",
-        type: "Phim",
-        genres: "Lãng mạn",
-        bannerImg: "https://thegioidienanh.vn/stores/news_dataimages/anhvu/072021/20/14/3844_03.jpg?rt=20210720144113",
-        shortDesc: "Dẫu biết là một bộ phim truyền hình Hàn Quốc phát sóng năm 2021, với sự tham gia của Han So-hee, Song Kang và Chae Jong-hyeop",
-        mediaId: "1",
-        userId: "123",
-        updated_at: "1/1/2023",
-        created_at: "1/1/2023",
-        watchedTime: "12h",
-        episodeNumber: "8",
+        "id": 80,
+        "name": "Crime"
     },
     {
-        index: '1',
-        title: "Dẫu biết",
-        year: "2021",
-        type: "Phim",
-        genres: "Lãng mạn",
-        bannerImg: "https://thegioidienanh.vn/stores/news_dataimages/anhvu/072021/20/14/3844_03.jpg?rt=20210720144113",
-        shortDesc: "Dẫu biết là một bộ phim truyền hình Hàn Quốc phát sóng năm 2021, với sự tham gia của Han So-hee, Song Kang và Chae Jong-hyeop",
-        mediaId: "1",
-        userId: "123",
-        updated_at: "1/1/2023",
-        created_at: "1/1/2023",
-        watchedTime: "12h",
-        episodeNumber: "8",
+        "id": 99,
+        "name": "Documentary"
     },
     {
-        index: '1',
-        title: "Dẫu biết",
-        year: "2021",
-        type: "Phim",
-        genres: "Lãng mạn",
-        bannerImg: "https://thegioidienanh.vn/stores/news_dataimages/anhvu/072021/20/14/3844_03.jpg?rt=20210720144113",
-        shortDesc: "Dẫu biết là một bộ phim truyền hình Hàn Quốc phát sóng năm 2021, với sự tham gia của Han So-hee, Song Kang và Chae Jong-hyeop",
-        mediaId: "1",
-        userId: "123",
-        updated_at: "1/1/2023",
-        created_at: "1/1/2023",
-        watchedTime: "12h",
-        episodeNumber: "8",
+        "id": 18,
+        "name": "Drama"
     },
+    {
+        "id": 10751,
+        "name": "Family"
+    },
+    {
+        "id": 14,
+        "name": "Fantasy"
+    },
+    {
+        "id": 36,
+        "name": "History"
+    },
+    {
+        "id": 27,
+        "name": "Horror"
+    },
+    {
+        "id": 10402,
+        "name": "Music"
+    },
+    {
+        "id": 9648,
+        "name": "Mystery"
+    },
+    {
+        "id": 10749,
+        "name": "Romance"
+    },
+    {
+        "id": 878,
+        "name": "Science Fiction"
+    },
+    {
+        "id": 10770,
+        "name": "TV Movie"
+    },
+    {
+        "id": 53,
+        "name": "Thriller"
+    },
+    {
+        "id": 10752,
+        "name": "War"
+    },
+    {
+        "id": 37,
+        "name": "Western"
+    }
 ]

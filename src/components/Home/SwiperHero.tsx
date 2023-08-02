@@ -75,7 +75,7 @@ const SwiperHero = () => {
             </SwiperSlide>
           ))}
         </Swiper>
-        <div className="absolute top-[200px] z-10 mx-[124px] lg:grid grid-cols-4 w-2/3 hidden">
+        <div className="absolute top-[200px] z-10 mx-[124px] lg:grid grid-cols-4 2xl:w-[70%] w-[80%] hidden">
           <div className="space-y-8 col-span-3">
             <h1>{heroData.title}</h1>
             <div className="flex items-center space-x-8">

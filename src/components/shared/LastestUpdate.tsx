@@ -1,23 +1,24 @@
 "use client";
-import { lastestUpdate } from "@/constant";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Image from "next/image";
 import "swiper/css/free-mode";
 import { FreeMode } from "swiper/modules";
 import { AiOutlinePlus } from "react-icons/ai";
 import ArrowRight from "@/lib/icon/ArrowRight";
-import SwiperCore from 'swiper/core'
+import SwiperCore from "swiper/core";
 import React, { useEffect, useRef, useState } from "react";
+import { LastestUpdateInterface } from "@/lib/interface";
+import { movieGenres } from "@/constant";
 
-
-
-const LastestUpdate = () => {
+const LastestUpdate = ({ data, title }: {data: LastestUpdateInterface, title: string}) => {
   const swiperRef = useRef<SwiperCore | null>(null);
+  // console.log(data);
+
 
   return (
     <div className="py-4 px-2">
       <div className="flex justify-between">
-        <h3 className="py-4">Mới cập nhật</h3>
+        <h3 className="py-4">{title}</h3>
         <div className="flex items-center space-x-4 text-white">
           <button
             onClick={() => {
@@ -39,7 +40,7 @@ const LastestUpdate = () => {
       </div>
       <div>
         <Swiper
-        onSwiper={(swiper) => {
+          onSwiper={(swiper) => {
             swiperRef.current = swiper;
           }}
           speed={500}
@@ -71,13 +72,13 @@ const LastestUpdate = () => {
             },
           }}
         >
-          {lastestUpdate.map((i) => (
+          {data.results.map((i: LastestUpdateInterface) => (
             <SwiperSlide>
               <div className="relative max-w-[230px] h-[345px] cursor-pointer rounded-2xl overflow-hidden">
                 <Image
                   fill
-                  src={i.bannerImg}
-                  alt={i.title}
+                  src={`https://image.tmdb.org/t/p/original${i.poster_path}`}
+                  alt={i.title || i.original_name}
                   style={{
                     objectFit: "cover",
                   }}
@@ -87,12 +88,14 @@ const LastestUpdate = () => {
 
                 <div className="w-full absolute bottom-0 p-2 space-y-1">
                   <p className="text-base line-clamp-1 font-semibold text-gray-300">
-                    {i.title}
+                    {i.title || i.original_name}
                   </p>
                   <div className="flex space-x-2 text-[0.8rem] font-medium">
-                    <p className="text-primary">{i.type}</p>
+                    <p className="text-primary capitalize">{i.media_type}</p>
                     <span>-</span>
-                    <p className="text-gray-500 truncate">{i.genres}</p>
+                    <p className="text-gray-500 truncate">
+                      
+                    </p>
                   </div>
                 </div>
 
