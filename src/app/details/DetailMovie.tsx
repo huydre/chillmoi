@@ -67,7 +67,6 @@ const DetailMovie: React.FC<DetailMovieProps> = ({
               <div className="relative w-[186px] h-[279px]">
                 <Image
                   src={
-                    ` https://image.tmdb.org/t/p/original${data.poster_path}` ||
                     `https://image.tmdb.org/t/p/w500${data.poster_path}`
                   }
                   fill
