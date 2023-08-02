@@ -18,7 +18,7 @@ const DetailMovie: React.FC<DetailMovieProps> = ({ data }) => {
           <Image
             fill
             src={` https://image.tmdb.org/t/p/original${data.backdrop_path}` || `https://image.tmdb.org/t/p/w500${data.backdrop_path}`}
-            alt={data.original_title}
+            alt={data.original_title || data.title}
             style={{
               objectFit: "cover",
             }}
