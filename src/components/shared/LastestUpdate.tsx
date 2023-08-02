@@ -10,10 +10,15 @@ import React, { useEffect, useRef, useState } from "react";
 import { LastestUpdateInterface } from "@/lib/interface";
 import { movieGenres } from "@/constant";
 
-const LastestUpdate = ({ data, title }: {data: LastestUpdateInterface, title: string}) => {
+const LastestUpdate = ({
+  data,
+  title,
+}: {
+  data: LastestUpdateInterface;
+  title: string;
+}) => {
   const swiperRef = useRef<SwiperCore | null>(null);
   // console.log(data);
-
 
   return (
     <div className="py-4 px-2">
@@ -72,36 +77,36 @@ const LastestUpdate = ({ data, title }: {data: LastestUpdateInterface, title: st
             },
           }}
         >
-          {data.results.slice(0,10).map((i: LastestUpdateInterface) => (
+          {data.results.slice(0, 10).map((i: LastestUpdateInterface) => (
             <SwiperSlide>
               <div className="relative max-w-[230px] h-[345px] cursor-pointer rounded-2xl overflow-hidden">
-                <Image
-                  fill
-                  src={`https://image.tmdb.org/t/p/original${i.poster_path}`}
-                  alt={i.title || i.original_name}
-                  style={{
-                    objectFit: "cover",
-                  }}
-                />
+                <a href={`details/${i.id}`}>
+                  <Image
+                    fill
+                    src={`https://image.tmdb.org/t/p/original${i.poster_path}`}
+                    alt={i.title || i.original_name}
+                    style={{
+                      objectFit: "cover",
+                    }}
+                  />
 
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/80 top-1/3"></div>
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/80 top-1/3"></div>
 
-                <div className="w-full absolute bottom-0 p-2 space-y-1">
-                  <p className="text-base line-clamp-1 font-semibold text-gray-300">
-                    {i.title || i.original_name}
-                  </p>
-                  <div className="flex space-x-2 text-[0.8rem] font-medium">
-                    <p className="text-primary capitalize">{i.media_type}</p>
-                    <span>-</span>
-                    <p className="text-gray-500 truncate">
-                      
+                  <div className="w-full absolute bottom-0 p-2 space-y-1">
+                    <p className="text-base line-clamp-1 font-semibold text-gray-300">
+                      {i.title || i.original_name}
                     </p>
+                    <div className="flex space-x-2 text-[0.8rem] font-medium">
+                      <p className="text-primary capitalize">{i.media_type}</p>
+                      <span>-</span>
+                      <p className="text-gray-500 truncate"></p>
+                    </div>
                   </div>
-                </div>
 
-                <div className="absolute top-2 right-2 bg-white/20 p-2 text-black rounded-full backdrop-blur-sm hover:bg-white/60 transition ease-in-out duration-300">
-                  <AiOutlinePlus />
-                </div>
+                  <div className="absolute top-2 right-2 bg-white/20 p-2 text-black rounded-full backdrop-blur-sm hover:bg-white/60 transition ease-in-out duration-300">
+                    <AiOutlinePlus />
+                  </div>
+                </a>
               </div>
             </SwiperSlide>
           ))}

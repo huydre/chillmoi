@@ -1,4 +1,7 @@
+import { ReactNode } from "react";
+
 export interface LastestUpdateInterface {
+  id: string;
   results: any;
   genres_ids: any;
   poster_path: any;
@@ -16,3 +19,12 @@ export interface LastestUpdateInterface {
     | undefined;
 }
 
+export interface DetailMovieInterface {
+  overview: string;
+  title: string;
+  adult: boolean;
+  backdrop_path: string;
+  genres: any;
+  original_title: string;
+  release_date: string;
+}

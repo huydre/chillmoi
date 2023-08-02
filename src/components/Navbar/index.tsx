@@ -13,9 +13,9 @@ const Navbar = () => {
         
       </div>
       <Tooltip content="Trang chủ" placement="right">
-        <button className="p-2 rounded-xl transition duration-300 ease-in-out bg-primary">
+        <a href="/" className="p-2 rounded-xl transition duration-300 ease-in-out bg-primary">
           <HomeIcon />
-        </button>
+        </a>
       </Tooltip>
       <Tooltip content="Khám phá" placement="right">
         <button className="p-2 hover:bg-primary/10 rounded-xl transition duration-300 ease-in-out">
