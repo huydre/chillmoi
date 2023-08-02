@@ -72,7 +72,7 @@ const LastestUpdate = ({ data, title }: {data: LastestUpdateInterface, title: st
             },
           }}
         >
-          {data.results.map((i: LastestUpdateInterface) => (
+          {data.results.slice(0,10).map((i: LastestUpdateInterface) => (
             <SwiperSlide>
               <div className="relative max-w-[230px] h-[345px] cursor-pointer rounded-2xl overflow-hidden">
                 <Image
