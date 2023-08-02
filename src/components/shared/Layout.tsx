@@ -9,7 +9,7 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
-    <div className=" 2xl:px-[154px] flex text-white">
+    <div className=" 2xl:px-[154px] flex text-white bg-[#0E0E10]">
       <nav className="h-full fixed z-40">
         <Navbar />
       </nav>

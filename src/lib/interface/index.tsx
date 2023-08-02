@@ -20,6 +20,7 @@ export interface LastestUpdateInterface {
 }
 
 export interface DetailMovieInterface {
+  poster_path: any;
   overview: string;
   title: string;
   adult: boolean;
@@ -27,4 +28,6 @@ export interface DetailMovieInterface {
   genres: any;
   original_title: string;
   release_date: string;
+  vote_average: number;
+  vote_count: number;
 }
