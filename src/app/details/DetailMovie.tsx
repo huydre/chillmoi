@@ -5,8 +5,6 @@ import Image from "next/image";
 import { DetailMovieInterface } from "@/lib/interface";
 import { Avatar, CircularProgress, Divider } from "@nextui-org/react";
 import { BsFillPlayFill } from "react-icons/bs";
-import LastestUpdate from "@/components/shared/LastestUpdate";
-import LastestUpdateSection from "@/components/Home/LastestUpdateSection";
 
 interface DetailMovieProps {
   data: DetailMovieInterface;
@@ -28,7 +26,7 @@ const DetailMovie: React.FC<DetailMovieProps> = ({
         <div className="absolute inset-0 bg-gradient-to-t from-transparent z-10 to-black/40 bottom-1/3"></div>
         <Image
           fill
-          src={` https://image.tmdb.org/t/p/original${data.backdrop_path}`}
+          src={`https://image.tmdb.org/t/p/w500${data.backdrop_path}`}
           alt={""}
           style={{
             objectFit: "cover",
@@ -150,11 +148,12 @@ const DetailMovie: React.FC<DetailMovieProps> = ({
             </div>
           </div>
         </div>
-
-        <div className="pt-[56px]">
+        
+        {/* Recommend  */}
+        <div className="pt-[56px] min-w-[205px]">
           <h5 className="mb-6">Nội dung tương tự</h5>
           <div className="space-y-4">
-            {recommendation.results.map(
+            {recommendation.results.slice(0,8).map(
               (rcm: any) =>
                 rcm.poster_path && (
                   <div className="flex space-x-4">
