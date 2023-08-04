@@ -1,8 +1,8 @@
 import React from "react";
 import LastestUpdate from "../shared/LastestUpdate";
-import getTrendingAll from "../../../api/getTrendingAll";
+import getNowPlaying from "../../../api/getNowPlaying";
 
 export default async function LastestUpdateSection() {
-  const data = await getTrendingAll();
-  return <LastestUpdate data={data} title={"Mới cập nhật"}/>;
+  const data = await getNowPlaying();
+  return <LastestUpdate data={data} title={"Mới cập nhật"} mediatype="movie"/>;
 }

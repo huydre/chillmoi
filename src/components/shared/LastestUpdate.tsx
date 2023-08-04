@@ -13,9 +13,11 @@ import { movieGenres } from "@/constant";
 const LastestUpdate = ({
   data,
   title,
+  mediatype,
 }: {
   data: LastestUpdateInterface;
   title: string;
+  mediatype?: string;
 }) => {
   const swiperRef = useRef<SwiperCore | null>(null);
   // console.log(data);
@@ -24,7 +26,7 @@ const LastestUpdate = ({
     <div className="py-4 px-2">
       <div className="flex justify-between">
         <h3 className="py-4">{title}</h3>
-        <div className="flex items-center space-x-4 text-white">
+        <div className="flex items-center space-x-4 text-white mr-6">
           <button
             onClick={() => {
               swiperRef.current?.slidePrev();
@@ -80,11 +82,11 @@ const LastestUpdate = ({
           {data.results.slice(0, 10).map((i: LastestUpdateInterface) => (
             <SwiperSlide>
               <div className="relative max-w-[230px] h-[345px] cursor-pointer rounded-2xl overflow-hidden">
-                <a href={`details/${i.id}`}>
+                <a href={mediatype ? `details/${mediatype}/${i.id}/${i.title}` : `details/${i.media_type}/${i.id}/${i.title}` }>
                   <Image
                     fill
                     src={`https://image.tmdb.org/t/p/original${i.poster_path}`}
-                    alt={i.title || i.original_name}
+                    alt={i.title || i.name}
                     style={{
                       objectFit: "cover",
                     }}
@@ -94,10 +96,10 @@ const LastestUpdate = ({
 
                   <div className="w-full absolute bottom-0 p-2 space-y-1">
                     <p className="text-base line-clamp-1 font-semibold text-gray-300">
-                      {i.title || i.original_name}
+                      {i.title || i.name}
                     </p>
                     <div className="flex space-x-2 text-[0.8rem] font-medium">
-                      <p className="text-primary capitalize">{i.media_type}</p>
+                      <p className="text-primary capitalize font-semibold">{i.media_type || mediatype}</p>
                       <span>-</span>
                       <p className="text-gray-500 truncate"></p>
                     </div>

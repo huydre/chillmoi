@@ -6,14 +6,19 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import Image from "next/image";
-import { heroItem } from "@/constant";
 import { FaPlay } from "react-icons/fa";
 import { AiOutlinePlus, AiOutlineRight, AiOutlineLeft } from "react-icons/ai";
 import SwiperCore from 'swiper/core'
+import { StaticImport } from "next/dist/shared/lib/get-img-props";
 
 
-const SwiperHero = () => {
-  const [heroData, setHeroData] = useState(heroItem[0]);
+export interface SwiperHeroProps {
+  data: any;
+}
+
+const SwiperHero = ( {data} : SwiperHeroProps ) => {
+  const [heroData, setHeroData] = useState(data[0]);
+  const [indexSlide, setIndexSlide] = useState(1);
   const swiperRef = useRef<SwiperCore | null>(null);
 
   const handleSlideChange = (swiper: SwiperCore) => {
@@ -21,14 +26,17 @@ const SwiperHero = () => {
     const currentSlideKey = swiper.slides[swiper.activeIndex].getAttribute(
       "data-swiper-slide-index"
     );
-    if (currentSlideKey) setHeroData(heroItem[Number(currentSlideKey)]);
+    if (currentSlideKey) setHeroData(data[Number(currentSlideKey)]);
+    setIndexSlide(Number(currentSlideKey)+1);
   };
   
   //Hàm trả về key của slide tiếp theo
   const nextSlideKey = () => {
-    if (Number(heroData.index) === heroItem.length) return 0;
-    return Number(heroData.index);
+    if (indexSlide === data.length) return 0;
+    return Number(indexSlide);
   }
+
+  console.log(heroData);
 
   return (
     <div className="w-[calc(100% - 74px)]">
@@ -41,20 +49,22 @@ const SwiperHero = () => {
           slidesPerView={1}
           speed={700}
           loop={true}
-          autoplay={{
-            delay: 5000,
-          }}
+          // autoplay={{
+          //   delay: 5000,
+          // }}
           watchSlidesProgress
           modules={[Autoplay, Pagination, Navigation]}
           className="md:h-[650px] h-[600px]  cursor-grab overflow-hidden"
         >
-          {heroItem.map((i) => (
+          {data.map((i: {
+            [x: string]: any; index: any; bannerImg: string | StaticImport; 
+}) => (
             <SwiperSlide data-swiper-slide-index={i.index}>
               <div className="h-full bg-black/40 bg-blend-overlay ">
                 <Image
                   className="hidden xl:block"
                   fill
-                  src="/bg_overlay.svg"
+                  src={'/bg_overlay.svg'}
                   alt=""
                   quality={100}
                   style={{
@@ -63,7 +73,7 @@ const SwiperHero = () => {
                 />
                 <Image
                   className="-z-10"
-                  src={i.bannerImg}
+                  src={`https://image.tmdb.org/t/p/original${i.backdrop_path}`}
                   alt=""
                   fill
                   quality={100}
@@ -77,29 +87,29 @@ const SwiperHero = () => {
         </Swiper>
         <div className="absolute top-[200px] z-10 mx-[124px] lg:grid grid-cols-4 2xl:w-[70%] w-[80%] hidden">
           <div className="space-y-8 col-span-3">
-            <h1>{heroData.title}</h1>
+            <h1 className="line-clamp-2 leading-tight">{heroData.title || heroData.name}</h1>
             <div className="flex items-center space-x-8">
               <div className="flex items-center space-x-2">
-                <button className="bg-primary p-3 rounded-full">
+                <a href={`details/${heroData.media_type}/${heroData.id}/${heroData.title || heroData.name}` } className="bg-primary p-3 rounded-full text-black">
                   <FaPlay size="1em" />
-                </button>
+                </a>
                 <h6 className="text-md">Xem ngay</h6>
               </div>
               <div className="flex items-center space-x-2">
-                <button className="bg-primary p-3 rounded-full">
+                <button className="bg-white p-3 rounded-full text-black">
                   <AiOutlinePlus />
                 </button>
                 <h6 className="text-md">Danh sách</h6>
               </div>
             </div>
-            <div className="xl:flex space-x-12 pt-12 hidden">
+            <div className="xl:flex space-x-12 pt-6 hidden">
               <div>
                 <h5 className="text-[1rem]">Năm</h5>
-                <h6>{heroData.year}</h6>
+                <h6>{heroData.release_date?.slice(0,4) || heroData.first_air_date?.slice(0,4)}</h6>
               </div>
               <div>
                 <h5 className="text-[1rem]">Loại</h5>
-                <h6>{heroData.type}</h6>
+                <h6>{heroData.media_type}</h6>
               </div>
               <div>
                 <h5 className="text-[1rem]">Thể loại</h5>
@@ -110,11 +120,11 @@ const SwiperHero = () => {
 
           <div className="space-y-8 xl:flex flex-col hidden">
             <div className="flex space-x-4 items-center">
-              <h4>0{heroData.index}</h4>
+              <h4>0{indexSlide}</h4>
               <div className="h-[2px] bg-white w-12" />
-              <h4>0{heroItem.length}</h4>
+              <h4>0{data.length}</h4>
             </div>
-            <div className="w-[300px] h-[85px]">{heroData.shortDesc}</div>
+            <div className="w-[300px] line-clamp-3">{heroData.overview}</div>
             <div className="flex items-center space-x-4 pt-8">
               <button onClick={() => {
                     swiperRef.current?.slidePrev();
@@ -130,17 +140,17 @@ const SwiperHero = () => {
           </div>
         </div>
 
-        <aside className="absolute bg-[#0E0E10] lg:w-[420px] flex right-0 -translate-y-[170px] z-20 2xl:right-[154px] items-center rounded-tl-xl w-full md:pl-[74px] lg:pl-0">
+        <aside className="absolute bg-[#0E0E10] lg:w-[420px] flex right-0 -translate-y-[169px] z-20 2xl:right-[154px] items-center rounded-tl-xl w-full md:pl-[74px] lg:pl-0">
           <div className="px-[40px] w-full space-y-2">
             <h5 className="text-sm uppercase text-gray-400">Tiếp theo</h5>
-            <h3 className="text-xl font-medium">
-                  {heroItem[nextSlideKey()].title}
+            <h3 className="text-xl font-medium line-clamp-2">
+                  {data[nextSlideKey()]?.title || data[nextSlideKey()]?.name}
             </h3>
           </div>
           <picture className="relative min-h-[170px] min-w-[150px] bg-gradient-to-b from-transparent to-black/80 bg-blend-overlay">
             <Image
               fill
-              src={heroItem[nextSlideKey()].bannerImg}
+              src={`https://image.tmdb.org/t/p/w500${data[nextSlideKey()]?.backdrop_path}`}
               alt=""
               quality={100}
               style={{

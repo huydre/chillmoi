@@ -1,21 +1,27 @@
 "use client";
-import Layout from "@/components/shared/Layout";
 import React from "react";
 import Image from "next/image";
 import { DetailMovieInterface } from "@/lib/interface";
-import { Avatar, CircularProgress, Divider } from "@nextui-org/react";
-import { BsFillPlayFill } from "react-icons/bs";
+import { CircularProgress, Divider } from "@nextui-org/react";
+import { BsFillPlayFill, BsSend } from "react-icons/bs";
+import LastestUpdate from "@/components/shared/LastestUpdate";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import Recommendation from "@/components/shared/Recommendation";
 
 interface DetailMovieProps {
   data: DetailMovieInterface;
   recommendation: any;
   cast: any;
+  similar: any;
 }
 
 const DetailMovie: React.FC<DetailMovieProps> = ({
   data,
   recommendation,
   cast,
+  similar,
 }) => {
   console.log(recommendation);
 
@@ -57,16 +63,14 @@ const DetailMovie: React.FC<DetailMovieProps> = ({
         </div>
       </div>
 
-      <div className="flex w-full">
+      <div className="w-full pt-[40px] px-[100px]">
         {/* Info section  */}
         <div>
-          <div className="px-[100px] pt-[40px]">
+          <div className=" ">
             <div className="flex space-x-8">
               <div className="relative w-[186px] h-[279px]">
                 <Image
-                  src={
-                    `https://image.tmdb.org/t/p/w500${data.poster_path}`
-                  }
+                  src={`https://image.tmdb.org/t/p/w500${data.poster_path}`}
                   fill
                   alt=""
                   style={{
@@ -107,94 +111,24 @@ const DetailMovie: React.FC<DetailMovieProps> = ({
               </div>
             </div>
           </div>
-
-          <Divider className="my-4" />
-
-          <div className="px-[100px] flex space-x-10">
-            <div className="w-2/3">
-              <p className="uppercase text-sm font-semibold">Tóm tắt</p>
-              <p className="text-sm text-gray-400 mt-6">{data.overview}</p>
-            </div>
-            {/* Cast list  */}
-            <div className="w-1/3 flex justify-end">
-              <div>
-                <p className="uppercase text-sm font-semibold mb-6">
-                  Diễn viên
-                </p>
-                <div className="space-y-4">
-                  {cast
-                    .sort(
-                      (a: { popularity: number }, b: { popularity: number }) =>
-                        a.popularity > b.popularity
-                    )
-                    .slice(0, 10)
-                    .map((casts: any) => (
-                      <div className="flex space-x-3">
-                        <div>
-                          <Avatar
-                            size="lg"
-                            src={`https://image.tmdb.org/t/p/w500${casts.profile_path}`}
-                            name={casts.name}
-                          />
-                        </div>
-                        <div>
-                          <p className="text-primary">{casts.name}</p>
-                          <p className="text-sm">{casts.character}</p>
-                        </div>
-                      </div>
-                    ))}
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
-        
-        {/* Recommend  */}
-        <div className="pt-[56px] min-w-[205px]">
-          <h5 className="mb-6">Nội dung tương tự</h5>
-          <div className="space-y-4">
-            {recommendation.results.slice(0,8).map(
-              (rcm: any) =>
-                rcm.poster_path && (
-                  <div className="flex space-x-4">
-                    <div className="relative min-w-[95px] min-h-[140px]">
-                      <Image
-                        fill
-                        src={`https://image.tmdb.org/t/p/w500${rcm.poster_path}`}
-                        alt=""
-                        style={{
-                          objectFit: "cover",
-                        }}
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <p className="font-semibold text-sm line-clamp-2">
-                        {rcm.title}
-                      </p>
-                      <div className="flex items-center space-x-2">
-                        <div>
-                          <CircularProgress
-                            color="primary"
-                            size="md"
-                            showValueLabel={true}
-                            value={Number(rcm.vote_average.toFixed(1)) * 10}
-                          />
-                        </div>
-                        <div>
-                          <p className="text-sm text-gray-500 font-semibold">
-                            {rcm.release_date.slice(0, 4)}
-                          </p>
-                          <p className="text-xs text-gray-500 font-semibold uppercase">
-                            {rcm.media_type}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                )
-            )}
-          </div>
-        </div>
+
+        {/* Similar  */}
+        <Recommendation
+          data={similar.results}
+          title="Nôi dung tương tự"
+          mediatype={"movie"}
+        />
+        {/* Recommendation  */}
+        {recommendation.results.length === 0 ? (
+          <></>
+        ) : (
+          <Recommendation
+            data={recommendation.results}
+            title="Có thể bạn cũng thích"
+            mediatype={"movie"}
+          />
+        )}
       </div>
     </div>
   );

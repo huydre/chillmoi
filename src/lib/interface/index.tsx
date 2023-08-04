@@ -7,6 +7,7 @@ export interface LastestUpdateInterface {
   poster_path: any;
   title: string;
   original_name: any;
+  name: string;
   media_type:
     | string
     | number
@@ -20,6 +21,8 @@ export interface LastestUpdateInterface {
 }
 
 export interface DetailMovieInterface {
+  name: ReactNode;
+  first_air_date: any;
   poster_path: any;
   overview: string;
   title: string;
