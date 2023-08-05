@@ -28,7 +28,7 @@ const DetailMovie: React.FC<DetailMovieProps> = ({
   reviews,
 }) => {
   const director = cast.crew.filter((e: any) => e.job === "Director");
-  console.log(reviews);
+  // console.log(reviews);
 
   return (
     <div className="min-h-screen w-full">
@@ -45,7 +45,7 @@ const DetailMovie: React.FC<DetailMovieProps> = ({
           className="z-0"
         />
 
-        <div className="absolute bottom-8 w-full flex justify-center z-20">
+        <div className="absolute bottom-8 w-full lg:flex justify-center z-20 hidden">
           <button className="text-xs font-semibold outline outline-[2px] outline-white/30 px-9 py-3 rounded-full flex items-center space-x-3">
             <BsFillPlayFill size="1.5em" />
             <p>TRAILER</p>
@@ -68,12 +68,12 @@ const DetailMovie: React.FC<DetailMovieProps> = ({
         </div>
       </div>
 
-      <div className="w-full pt-[40px] px-[100px]">
+      <div className="w-full pt-[40px] lg:px-[100px] px-4">
         {/* Info section  */}
         <div>
-          <div className="flex space-x-10">
-            <div className="flex space-x-8 w-full">
-              <div className="relative w-[186px] h-[279px]">
+          <div className="lg:flex lg:space-x-10">
+            <div className="flex lg:space-x-8 w-full">
+              <div className="relative w-[186px] h-[279px] lg:block hidden">
                 <Image
                   src={`https://image.tmdb.org/t/p/w500${data.poster_path}`}
                   fill
@@ -84,7 +84,7 @@ const DetailMovie: React.FC<DetailMovieProps> = ({
                 />
               </div>
 
-              <div className="mx-[124px] pt-4 space-y-6 max-w-[600px]">
+              <div className="lg:mx-[124px] pt-4 space-y-6 max-w-[600px]">
                 <h2 className="line-clamp-2 leading-tight text-4xl">
                   {data.title}
                 </h2>
@@ -117,7 +117,7 @@ const DetailMovie: React.FC<DetailMovieProps> = ({
             </div>
 
             {/* cast , direcor, genres  */}
-            <div className="space-y-6 w-1/3 pt-4">
+            <div className="space-y-6 lg:w-1/3 pt-8 lg:pt-4">
               {/* Comment button, share button  */}
               <div className="flex space-x-8 mb-4">
                 {/* Comment  */}
