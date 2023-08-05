@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import MobileNavbar from "../Navbar/MobileNavbar";
+import { Analytics } from "@vercel/analytics/react";
 
 interface LayoutProps {
   children: ReactNode;
@@ -24,8 +25,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         </footer>
       </div>
       <nav className="fixed w-full z-40 bottom-0">
-          <MobileNavbar />
-        </nav>
+        <MobileNavbar />
+      </nav>
+      <Analytics />
     </div>
   );
 };
