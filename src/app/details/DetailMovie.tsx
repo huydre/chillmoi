@@ -2,19 +2,22 @@
 import React from "react";
 import Image from "next/image";
 import { DetailMovieInterface } from "@/lib/interface";
-import { CircularProgress, Divider } from "@nextui-org/react";
+import { CircularProgress, Avatar } from "@nextui-org/react";
 import { BsFillPlayFill, BsSend } from "react-icons/bs";
+import { BiCommentDetail } from "react-icons/bi";
 import LastestUpdate from "@/components/shared/LastestUpdate";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import Recommendation from "@/components/shared/Recommendation";
+import Comment from "@/components/shared/Comment";
 
 interface DetailMovieProps {
   data: DetailMovieInterface;
   recommendation: any;
   cast: any;
   similar: any;
+  reviews: any;
 }
 
 const DetailMovie: React.FC<DetailMovieProps> = ({
@@ -22,8 +25,10 @@ const DetailMovie: React.FC<DetailMovieProps> = ({
   recommendation,
   cast,
   similar,
+  reviews,
 }) => {
-  console.log(recommendation);
+  const director = cast.crew.filter((e: any) => e.job === "Director");
+  console.log(reviews);
 
   return (
     <div className="min-h-screen w-full">
@@ -66,8 +71,8 @@ const DetailMovie: React.FC<DetailMovieProps> = ({
       <div className="w-full pt-[40px] px-[100px]">
         {/* Info section  */}
         <div>
-          <div className=" ">
-            <div className="flex space-x-8">
+          <div className="flex space-x-10">
+            <div className="flex space-x-8 w-full">
               <div className="relative w-[186px] h-[279px]">
                 <Image
                   src={`https://image.tmdb.org/t/p/w500${data.poster_path}`}
@@ -110,25 +115,86 @@ const DetailMovie: React.FC<DetailMovieProps> = ({
                 </div>
               </div>
             </div>
+
+            {/* cast , direcor, genres  */}
+            <div className="space-y-6 w-1/3 pt-4">
+              {/* Comment button, share button  */}
+              <div className="flex space-x-8 mb-4">
+                {/* Comment  */}
+                <div>
+                  <button>
+                    <BiCommentDetail size="2em" />
+                  </button>
+                  <p className="text-xs">Bình luận</p>
+                </div>
+                {/* Share  */}
+                <div>
+                  <button>
+                    <BsSend size="2em" />
+                  </button>
+                  <p className="text-xs">Chia sẻ</p>
+                </div>
+              </div>
+              {/* cast  */}
+              <div className="line-clamp-2 text-sm">
+                <label className="inline text-gray-500">Diễn viên: </label>
+                <p className="inline">
+                  {cast.cast.map((i: any) => i.name).join(", ")}
+                </p>
+              </div>
+
+              {/* director  */}
+              <div className="line-clamp-2 text-sm">
+                <label className="inline text-gray-500">Đạo diễn:</label>
+                <p className="inline">
+                  {director.map((i: any) => i.name).join(", ")}
+                </p>
+              </div>
+
+              {/* genres  */}
+              <div className="line-clamp-2 text-sm">
+                <label className="inline text-gray-500">Thể loại:</label>
+                <p className="inline">
+                  {data.genres
+                    .map((genre: { name: string }) => genre.name)
+                    .join(", ")}
+                </p>
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Similar  */}
-        <Recommendation
-          data={similar.results}
-          title="Nôi dung tương tự"
-          mediatype={"movie"}
-        />
-        {/* Recommendation  */}
-        {recommendation.results.length === 0 ? (
-          <></>
-        ) : (
+        <div className="pt-10">
+          {/* Similar  */}
           <Recommendation
-            data={recommendation.results}
-            title="Có thể bạn cũng thích"
+            data={similar.results}
+            title="Nôi dung tương tự"
             mediatype={"movie"}
           />
-        )}
+        </div>
+
+        <div className="pt-10">
+          {/* Recommendation  */}
+          {recommendation.results.length === 0 ? (
+            <></>
+          ) : (
+            <Recommendation
+              data={recommendation.results}
+              title="Có thể bạn cũng thích"
+              mediatype={"movie"}
+            />
+          )}
+        </div>
+
+        {/* Review  */}
+        <div>
+            <h3 className="py-4 pt-10">Bình luận</h3>
+            <div className="space-y-8">
+             { reviews.results.map((i: any) => (
+               <Comment data={i} />
+              ))}
+            </div>
+        </div>
       </div>
     </div>
   );
