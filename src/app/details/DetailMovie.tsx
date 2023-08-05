@@ -2,7 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import { DetailMovieInterface } from "@/lib/interface";
-import { CircularProgress, Avatar } from "@nextui-org/react";
+import { CircularProgress, Avatar, Badge } from "@nextui-org/react";
 import { BsFillPlayFill, BsSend } from "react-icons/bs";
 import { BiCommentDetail } from "react-icons/bi";
 import LastestUpdate from "@/components/shared/LastestUpdate";
@@ -28,7 +28,7 @@ const DetailMovie: React.FC<DetailMovieProps> = ({
   reviews,
 }) => {
   const director = cast.crew.filter((e: any) => e.job === "Director");
-  // console.log(reviews);
+  console.log(reviews);
 
   return (
     <div className="min-h-screen w-full">
@@ -123,7 +123,9 @@ const DetailMovie: React.FC<DetailMovieProps> = ({
                 {/* Comment  */}
                 <div>
                   <button>
-                    <BiCommentDetail size="2em" />
+                    <Badge content={reviews.total_results}>
+                      <BiCommentDetail size="2em" />
+                    </Badge>
                   </button>
                   <p className="text-xs">Bình luận</p>
                 </div>
@@ -188,12 +190,15 @@ const DetailMovie: React.FC<DetailMovieProps> = ({
 
         {/* Review  */}
         <div>
-            <h3 className="py-4 pt-10">Bình luận</h3>
-            <div className="space-y-8">
-             { reviews.results.map((i: any) => (
-               <Comment data={i} />
-              ))}
-            </div>
+          <h3 className="py-4 pt-10">Bình luận</h3>
+          <div className="space-y-8">
+            { !reviews.total_results ?
+            <p className="pb-3 text-sm italic">Chưa có bình luận</p>
+            :
+            reviews.results.map((i: any) => (
+              <Comment data={i} />
+            ))}
+          </div>
         </div>
       </div>
     </div>

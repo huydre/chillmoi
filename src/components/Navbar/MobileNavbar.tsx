@@ -2,27 +2,38 @@
 import DiscoverIcon from "@/lib/icon/DiscoverIcon";
 import HomeIcon from "@/lib/icon/HomeIcon";
 import ScheduleIcon from "@/lib/icon/ScheduleIcon";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Library from "@/lib/icon/Library";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function MobileNavbar() {
+  const pathname = usePathname();
+
   const Menus = [
     { name: "Trang chủ", icon: <HomeIcon />, dis: "translate-x-10", path: "/" },
-    { name: "Khám phá", icon: <DiscoverIcon />, dis: "translate-x-32", path: "/" },
-    { name: "Chủ đề", icon: <Library />, dis: "translate-x-52", path: "/" },
-    { name: "Lịch phát sóng", icon: <ScheduleIcon />, dis: "translate-x-72", path: "/" },
+    { name: "Khám phá", icon: <DiscoverIcon />, dis: "translate-x-32", path: "/discovery" },
+    { name: "Chủ đề", icon: <Library />, dis: "translate-x-52", path: "/genres" },
+    { name: "Lịch phát sóng", icon: <ScheduleIcon />, dis: "translate-x-72", path: "/schedule" },
   ];
 
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState(-1);
+
+  useEffect(() => {
+    setActive(-1)
+    for (let index = 0; index < Menus.length; index++) {
+      if (pathname === Menus[index].path) setActive(index);
+    }
+  },[pathname])
 
   return (
     <div className="bg-[#0E0E10] h-[4rem] px-6 rounded-t-xl md:hidden">
       <ul className="flex relative justify-around">
         {Menus.map((menu, i) => (
           <li key={i} className="w-16">
-            <a
+            <Link
+              href={menu.path}
               className="flex flex-col text-center pt-6"
-              onClick={() => setActive(i)}
             >
               <span
                 className={`text-xl cursor-pointer duration-500 flex justify-center ${
@@ -50,7 +61,7 @@ export default function MobileNavbar() {
               >
                 <p className="text-xs">{menu.name}</p>
               </span>
-            </a>
+            </Link>
           </li>
         ))}
       </ul>
