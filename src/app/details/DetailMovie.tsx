@@ -5,12 +5,9 @@ import { DetailMovieInterface } from "@/lib/interface";
 import { CircularProgress, Avatar, Badge } from "@nextui-org/react";
 import { BsFillPlayFill, BsSend } from "react-icons/bs";
 import { BiCommentDetail } from "react-icons/bi";
-import LastestUpdate from "@/components/shared/LastestUpdate";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/pagination";
 import Recommendation from "@/components/shared/Recommendation";
 import Comment from "@/components/shared/Comment";
+import { Suspense } from 'react'
 
 interface DetailMovieProps {
   data: DetailMovieInterface;
@@ -28,7 +25,7 @@ const DetailMovie: React.FC<DetailMovieProps> = ({
   reviews,
 }) => {
   const director = cast.crew.filter((e: any) => e.job === "Director");
-  console.log(reviews);
+  console.log(data);
 
   return (
     <div className="min-h-screen w-full">
@@ -105,10 +102,10 @@ const DetailMovie: React.FC<DetailMovieProps> = ({
                 </div>
 
                 <div className="flex space-x-8">
-                  <button className="ring-2 ring-primary bg-primary text-sm font-semibold px-4 py-2 rounded-full  transition duration-200 ease-in-out flex space-x-2 items-center">
+                  <a href={`/watch/movie/${data.id}/${data.title}`} className="ring-2 ring-primary bg-primary text-sm font-semibold px-4 py-2 rounded-full  transition duration-200 ease-in-out flex space-x-2 items-center">
                     <BsFillPlayFill />
                     <p>Xem ngay</p>
-                  </button>
+                  </a>
                   <button className="ring-2 ring-white text-sm font-semibold px-4 py-2 rounded-full hover:bg-white hover:text-black transition duration-200 ease-in-out">
                     + Danh sách
                   </button>

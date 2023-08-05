@@ -8,7 +8,6 @@ import ArrowRight from "@/lib/icon/ArrowRight";
 import SwiperCore from "swiper/core";
 import React, { useEffect, useRef, useState } from "react";
 import { LastestUpdateInterface } from "@/lib/interface";
-import { movieGenres } from "@/constant";
 
 const LastestUpdate = ({
   data,
@@ -82,7 +81,13 @@ const LastestUpdate = ({
           {data.results.slice(0, 10).map((i: LastestUpdateInterface) => (
             <SwiperSlide>
               <div className="relative max-w-[230px] h-[345px] cursor-pointer rounded-2xl overflow-hidden">
-                <a href={mediatype ? `details/${mediatype}/${i.id}/${i.title}` : `details/${i.media_type}/${i.id}/${i.title}` }>
+                <a
+                  href={
+                    mediatype
+                      ? `details/${mediatype}/${i.id}/${i.title}`
+                      : `details/${i.media_type}/${i.id}/${i.title}`
+                  }
+                >
                   <Image
                     fill
                     src={`https://image.tmdb.org/t/p/original${i.poster_path}`}
@@ -99,7 +104,9 @@ const LastestUpdate = ({
                       {i.title || i.name}
                     </p>
                     <div className="flex space-x-2 text-[0.8rem] font-medium">
-                      <p className="text-primary capitalize font-semibold">{i.media_type || mediatype}</p>
+                      <p className="text-primary capitalize font-semibold">
+                        {i.media_type || mediatype}
+                      </p>
                       <span>-</span>
                       <p className="text-gray-500 truncate"></p>
                     </div>

@@ -13,9 +13,7 @@ export default function Home() {
   return (
     <Layout>
       <SwiperHeroSection />
-      <Suspense fallback={<Loading />}>
         <LastestUpdateSection />
-      </Suspense>
       <PopularSection />
     </Layout>
   );

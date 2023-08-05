@@ -21,6 +21,7 @@ export interface LastestUpdateInterface {
 }
 
 export interface DetailMovieInterface {
+  id: any;
   name: ReactNode;
   first_air_date: any;
   poster_path: any;
