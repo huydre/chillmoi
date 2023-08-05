@@ -8,7 +8,7 @@ const WatchSection = ({id}: WatchSectionProps) => {
   return (
     <div className="min-h-screen pt-[100px]">
       <iframe
-        src={`https://autoembed.to/movie/tmdb/${id}`}
+        src={`https://autoembed.to/movie/tmdb/${id}?server=3`}
         width="100%"
         height="100%"
         frameBorder="0"
