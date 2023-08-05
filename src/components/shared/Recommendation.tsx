@@ -52,7 +52,7 @@ export default function Recommendation({
         {data.map((recom: any) => (
           <SwiperSlide>
             <Link href={`/details/${mediatype}/${recom.id}/${recom.title}`}>
-              <div className="relative w-[186px] h-[279px] cursor-pointer rounded-2xl overflow-hidden">
+              <div className="relative max-w-[186px] h-[279px] cursor-pointer rounded-2xl overflow-hidden">
                 <Image
                   fill
                   src={`https://image.tmdb.org/t/p/original${recom.poster_path}`}
