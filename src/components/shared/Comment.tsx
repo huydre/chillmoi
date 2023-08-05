@@ -70,9 +70,9 @@ export default function Comment({ data }: CommentProps) {
         >
           {data.content}
         </p>
-        <button className="text-sm text-gray-400" onClick={toggleBtn}>
+        { data.content.length > 200 && <button id="expandBtn" className="text-sm text-gray-400" onClick={toggleBtn}>
           {!isShowMore ? "Xem thêm..." : "Ẩn bớt"}
-        </button>
+        </button>}
       </div>
     </div>
   );
