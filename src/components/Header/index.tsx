@@ -35,7 +35,7 @@ const Header = () => {
       <a href="/">
         {/* <Image width={120} height={50} src="/text-logo.png" alt="" /> */}
       </a>
-      <div className="flex items-center justify-between space-x-6">
+      <div className="flex items-center justify-between space-x-3">
         <i className="hover:bg-slate-100/20 p-[6px] rounded-full transition duration-300 ease-in-out">
           <IoMdNotifications size="1.5em" />
         </i>
