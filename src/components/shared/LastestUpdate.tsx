@@ -90,7 +90,7 @@ const LastestUpdate = ({
                 >
                   <Image
                     fill
-                    src={`https://image.tmdb.org/t/p/original${i.poster_path}`}
+                    src={`https://image.tmdb.org/t/p/w500${i.poster_path}`}
                     alt={i.title || i.name}
                     style={{
                       objectFit: "cover",

@@ -55,7 +55,7 @@ export default function Recommendation({
               <div className="relative max-w-[186px] h-[279px] cursor-pointer rounded-2xl overflow-hidden">
                 <Image
                   fill
-                  src={`https://image.tmdb.org/t/p/original${recom.poster_path}`}
+                  src={`https://image.tmdb.org/t/p/w500${recom.poster_path}`}
                   alt={recom.title || recom.name}
                   style={{
                     objectFit: "cover",
