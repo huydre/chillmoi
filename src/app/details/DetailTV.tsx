@@ -180,7 +180,7 @@ const DetailTV: React.FC<DetailTVProps> = ({
 
             {/* Select mobile */}
             <div className="py-4">
-                <Dropdown className="bg-black">
+                <Dropdown className="bg-black text-white">
                   <DropdownTrigger>
                     <Button variant="bordered" >{data.seasons[seasons].name}</Button>
                   </DropdownTrigger>
