@@ -7,11 +7,12 @@ import PopularSection from "@/components/Home/PopularSection";
 import Layout from "@/components/shared/Layout";
 import SwiperHeroSection from "@/components/Home/SwiperHeroSection";
 
+
 export default function Home() {
   return (
     <Layout>
       <SwiperHeroSection />
-        <LastestUpdateSection />
+      <LastestUpdateSection />
       <PopularSection />
     </Layout>
   );

@@ -47,11 +47,11 @@ const SwiperHero = ({ data }: SwiperHeroProps) => {
           }}
           onSlideChange={(swiper) => handleSlideChange(swiper)}
           slidesPerView={1}
-          speed={700}
+          speed={800}
           loop={true}
-          // autoplay={{
-          //   delay: 5000,
-          // }}
+          autoplay={{
+            delay: 5000,
+          }}
           watchSlidesProgress
           modules={[Autoplay, Pagination, Navigation]}
           className="md:h-[650px] h-[600px]  cursor-grab overflow-hidden"
@@ -129,75 +129,74 @@ const SwiperHero = ({ data }: SwiperHeroProps) => {
           </a>
         </div>
 
-        <div className="absolute top-[200px] z-10 mx-[124px] lg:grid grid-cols-4 2xl:w-[70%] w-[80%] hidden">
-          <div className="space-y-8 col-span-3">
-            <h1 className="line-clamp-2 leading-tight">
-              {heroData.title || heroData.name}
-            </h1>
-            <div className="flex items-center space-x-8">
-              <div className="flex items-center space-x-2">
-                <a
-                  href={`details/${heroData.media_type}/${heroData.id}/${
-                    heroData.title || heroData.name
-                  }`}
-                  className="bg-primary p-3 rounded-full text-black"
+          <div className="absolute top-[200px] z-10 mx-[124px] lg:grid grid-cols-4 2xl:w-[70%] w-[80%] hidden">
+            <div className="space-y-8 col-span-3">
+              <h1 className="line-clamp-2 leading-tight">
+                {heroData.title || heroData.name}
+              </h1>
+              <div className="flex items-center space-x-8">
+                <div className="flex items-center space-x-2">
+                  <a
+                    href={`details/${heroData.media_type}/${heroData.id}/${
+                      heroData.title || heroData.name
+                    }`}
+                    className="bg-primary p-3 rounded-full text-black"
+                  >
+                    <FaPlay size="1em" />
+                  </a>
+                  <h6 className="text-md">Xem ngay</h6>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <button className="bg-white p-3 rounded-full text-black">
+                    <AiOutlinePlus />
+                  </button>
+                  <h6 className="text-md">Danh sách</h6>
+                </div>
+              </div>
+              <div className="xl:flex space-x-12 pt-6 hidden">
+                <div>
+                  <h5 className="text-[1rem]">Năm</h5>
+                  <h6>
+                    {heroData.release_date?.slice(0, 4) ||
+                      heroData.first_air_date?.slice(0, 4)}
+                  </h6>
+                </div>
+                <div>
+                  <h5 className="text-[1rem]">Loại</h5>
+                  <h6>{heroData.media_type}</h6>
+                </div>
+                <div>
+                  <h5 className="text-[1rem]">Thể loại</h5>
+                  <h6>{heroData.genres}</h6>
+                </div>
+              </div>
+            </div>
+
+            <div className="space-y-8 xl:flex flex-col hidden">
+              <div className="flex space-x-4 items-center">
+                <h4>0{indexSlide}</h4>
+                <div className="h-[2px] bg-white w-12" />
+                <h4>0{data.length}</h4>
+              </div>
+              <div className="w-[300px] line-clamp-3">{heroData.overview}</div>
+              <div className="flex items-center space-x-4 pt-8">
+                <button
+                  onClick={() => {
+                    swiperRef.current?.slidePrev();
+                  }}
                 >
-                  <FaPlay size="1em" />
-                </a>
-                <h6 className="text-md">Xem ngay</h6>
-              </div>
-              <div className="flex items-center space-x-2">
-                <button className="bg-white p-3 rounded-full text-black">
-                  <AiOutlinePlus />
+                  <AiOutlineLeft size="2em" />
                 </button>
-                <h6 className="text-md">Danh sách</h6>
-              </div>
-            </div>
-            <div className="xl:flex space-x-12 pt-6 hidden">
-              <div>
-                <h5 className="text-[1rem]">Năm</h5>
-                <h6>
-                  {heroData.release_date?.slice(0, 4) ||
-                    heroData.first_air_date?.slice(0, 4)}
-                </h6>
-              </div>
-              <div>
-                <h5 className="text-[1rem]">Loại</h5>
-                <h6>{heroData.media_type}</h6>
-              </div>
-              <div>
-                <h5 className="text-[1rem]">Thể loại</h5>
-                <h6>{heroData.genres}</h6>
+                <button
+                  onClick={() => {
+                    swiperRef.current?.slideNext();
+                  }}
+                >
+                  <AiOutlineRight size="2em" />
+                </button>
               </div>
             </div>
           </div>
-
-          <div className="space-y-8 xl:flex flex-col hidden">
-            <div className="flex space-x-4 items-center">
-              <h4>0{indexSlide}</h4>
-              <div className="h-[2px] bg-white w-12" />
-              <h4>0{data.length}</h4>
-            </div>
-            <div className="w-[300px] line-clamp-3">{heroData.overview}</div>
-            <div className="flex items-center space-x-4 pt-8">
-              <button
-                onClick={() => {
-                  swiperRef.current?.slidePrev();
-                }}
-              >
-                <AiOutlineLeft size="2em" />
-              </button>
-              <button
-                onClick={() => {
-                  swiperRef.current?.slideNext();
-                }}
-              >
-                <AiOutlineRight size="2em" />
-              </button>
-            </div>
-          </div>
-        </div>
-
         <aside className="absolute bg-[#0E0E10] lg:w-[420px] flex right-0 -translate-y-[169px] z-20 2xl:right-[154px] items-center lg:rounded-tl-xl w-full md:pl-[74px] lg:pl-0">
           <div className="px-[40px] w-full space-y-2">
             <h5 className="text-sm uppercase text-gray-400">Tiếp theo</h5>

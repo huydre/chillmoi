@@ -27,10 +27,13 @@ const WatchSection = ({ id, data, recommend }: WatchSectionProps) => {
           {data.release_date.slice(5, 7)} năm {data.release_date.slice(0, 4)}
         </p>
         <p className="line-clamp-3 text-gray-400">{data.overview}</p>
-        <Recommendation data={recommend.results}
-              title="Có thể bạn cũng thích"
-              mediatype={"movie"}/>
+        <Recommendation
+          data={recommend.results}
+          title="Có thể bạn cũng thích"
+          mediatype={"movie"}
+        />
       </div>
+      
     </div>
   );
 };

@@ -27,9 +27,9 @@ const Navbar = () => {
   }, [pathname]);
   return (
     <div className=" h-screen sticky md:flex flex-col space-y-6 px-3 py-4 items-center border-r-2 border-gray-900/30 hidden">
-      <div className="mb-4">
+      <a href="/" className="mb-4">
         <Image alt="logo" src={'/logo2.png'} height={50} width={50}/>
-      </div>
+      </a>
       {Menus.map((menu, i) => (
         <Tooltip content={menu.name} placement="right">
           <a
