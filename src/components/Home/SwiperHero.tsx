@@ -163,7 +163,7 @@ const SwiperHero = ({ data }: SwiperHeroProps) => {
                 </div>
                 <div>
                   <h5 className="text-[1rem]">Loại</h5>
-                  <h6>{heroData.media_type}</h6>
+                  <h6>{heroData.media_type === "movie" ? "Phim lẻ" : "Phim bộ"}</h6>
                 </div>
                 <div>
                   <h5 className="text-[1rem]">Thể loại</h5>

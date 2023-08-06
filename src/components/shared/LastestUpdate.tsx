@@ -105,7 +105,7 @@ const LastestUpdate = ({
                     </p>
                     <div className="flex space-x-2 text-[0.8rem] font-medium">
                       <p className="text-primary capitalize font-semibold">
-                        {i.media_type || mediatype}
+                        {(i.media_type || mediatype) === "movie" ? "Phim lẻ" : "Phim bộ"}
                       </p>
                       <span>-</span>
                       <p className="text-gray-500 truncate"></p>
