@@ -195,17 +195,19 @@ const DetailTV: React.FC<DetailTVProps> = ({
               ))}
             </div>
             {/* Chọn tập  */}
-            <div className="grid 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-3 grid-cols-2 gap-4 lg:px-6">
+            <div className="w-full grid 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-3 grid-cols-2 gap-4 lg:px-6">
               {seasonDetail.episodes.map((season: any) => (
-                <div className="relative">
+                <div className="relative h-[150px] w-full overflow-hidden">
                   <Image
                     src={`https://image.tmdb.org/t/p/w500${season.still_path}`}
                     alt={season.name}
-                    width={350}
-                    height={150}
+                    fill
+                    style={{
+                      objectFit: "cover",
+                    }}
                   />
 
-                  <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/80 top-1/3"></div>
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black top-1/4"></div>
 
                   <div className="w-full absolute bottom-0 p-2 space-y-1">
                     <p className="text-base line-clamp-1 font-semibold text-gray-300">
