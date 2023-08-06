@@ -24,7 +24,7 @@ const LastestUpdate = ({
   return (
     <div className="py-4 px-2">
       <div className="flex justify-between">
-        <h3 className="py-4">{title}</h3>
+        <h3 className="py-4 leading-tight line-clamp-2">{title}</h3>
         <div className="flex items-center space-x-4 text-white mr-6">
           <button
             onClick={() => {

@@ -86,11 +86,11 @@ const DetailMovie: React.FC<DetailMovieProps> = ({
                   {data.title}
                 </h2>
                 <div className="flex items-center space-x-4">
-                  <span className="bg-white text-black text-center py-[2px] text-sm font-semibold w-10 rounded-md">
+                  <span className="bg-white text-black text-center py-[2px] px-[2px] text-sm font-semibold w-10 rounded-md">
                     {data.release_date.slice(0, 4)}
                   </span>
                   <span className="font-bold"> • </span>
-                  <span>
+                  <span className="line-clamp-1">
                     {data.genres
                       .map((genre: { name: string }) => genre.name)
                       .join(",")}
