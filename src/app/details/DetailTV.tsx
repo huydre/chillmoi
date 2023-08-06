@@ -195,7 +195,7 @@ const DetailTV: React.FC<DetailTVProps> = ({
               ))}
             </div>
             {/* Chọn tập  */}
-            <div className="w-full grid 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-3 grid-cols-2 gap-4 lg:px-6">
+            <div className="w-full grid 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-3 grid-cols-2 gap-4 lg:px-6 h-min">
               {seasonDetail.episodes.map((season: any) => (
                 <div className="relative h-[150px] w-full overflow-hidden">
                   <Image
