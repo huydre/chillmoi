@@ -11,7 +11,7 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
-    <div className=" 2xl:px-[154px] text-white bg-[#0E0E10] pb-20 lg:pb-0">
+    <div className=" 2xl:px-[154px] text-white bg-[#0E0E10 lg:pb-0">
       <nav className="h-full fixed z-40">
         <Navbar />
       </nav>

@@ -7,6 +7,8 @@ import { Tooltip } from "@material-tailwind/react";
 import Library from "@/lib/icon/Library";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
+import { PiMonitor } from "react-icons/pi"
 
 const Menus = [
   { name: "Trang chủ", icon: <HomeIcon />, path: "/" },
@@ -26,54 +28,22 @@ const Navbar = () => {
     }
   }, [pathname]);
   return (
-    <div className=" h-screen sticky md:flex flex-col space-y-6 px-3 py-4 items-center border-r-2 border-gray-900/30 hidden">
-      <a href="/" className="mb-4">
-        <Image alt="logo" src={'/logo2.png'} height={50} width={50}/>
+    <div className=" h-screen sticky md:flex flex-col space-y-4 px-3 py-4 items-center border-r-1 border-gray-900 hidden">
+      <a className="mb-4" href="/">
+        <Image alt="logo" src={'/logo3.png'} height={50} width={50}/>
       </a>
       {Menus.map((menu, i) => (
         <Tooltip content={menu.name} placement="right">
-          <a
+          <Link
             href={menu.path}
-            className={`p-2 rounded-xl transition duration-300 ease-in-out  ${
-              menu.name === "Chủ đề" && "px-3"
-            } ${i === active && "bg-primary"}`}
+            className={`p-3 rounded-full transition duration-300 ease-in-out scale-110 text-gray-400 ${
+              menu.name === "Chủ đề" && "px-4"
+            } ${i === active ? "bg-primary  text-white" : "hover:bg-gray-800"}`}
           >
             {menu.icon}
-          </a>
+          </Link>
         </Tooltip>
       ))}
-      {/* <Tooltip content="Trang chủ" placement="right">
-        <a
-          href="/"
-          className="p-2 rounded-xl transition duration-300 ease-in-out bg-primary"
-        >
-          <HomeIcon />
-        </a>
-      </Tooltip>
-      <Tooltip content="Khám phá" placement="right">
-        <a
-          href="/discovery"
-          className="p-2 hover:bg-primary/10 rounded-xl transition duration-300 ease-in-out"
-        >
-          <DiscoverIcon />
-        </a>
-      </Tooltip>
-      <Tooltip content="Chủ đề" placement="right">
-        <a
-          href="/genres"
-          className="p-3 hover:bg-primary/10 rounded-xl transition duration-300 ease-in-out"
-        >
-          <Library />
-        </a>
-      </Tooltip>
-      <Tooltip content="Lịch phát sóng" placement="right">
-        <a
-          href="/schedule"
-          className="p-2 hover:bg-primary/10 rounded-xl transition duration-300 ease-in-out"
-        >
-          <ScheduleIcon />
-        </a>
-      </Tooltip> */}
     </div>
   );
 };

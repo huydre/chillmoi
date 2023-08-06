@@ -51,7 +51,7 @@ export default function Recommendation({
       >
         {data.map((recom: any) => (
           <SwiperSlide>
-            <Link href={`/details/${mediatype}/${recom.id}/${recom.title}`}>
+            <Link href={`/details/${recom.media_type}/${recom.id}/${recom.title || recom.name}`}>
               <div className="relative max-w-[186px] h-[279px] cursor-pointer rounded-2xl overflow-hidden">
                 <Image
                   fill
@@ -70,7 +70,7 @@ export default function Recommendation({
                   </p>
                   <div className="flex space-x-2 text-[0.8rem] font-medium">
                     <p className="text-primary capitalize font-semibold">
-                      {recom.media_type || mediatype}
+                      {mediatype === "tv" ? "Phim bộ" : "Phim lẻ"}
                     </p>
                     <span>-</span>
                     <p className="text-gray-500 truncate"></p>
