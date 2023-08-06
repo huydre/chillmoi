@@ -8,6 +8,7 @@ import { BiCommentDetail } from "react-icons/bi";
 import Recommendation from "@/components/shared/Recommendation";
 import Comment from "@/components/shared/Comment";
 import Link from "next/link";
+import {Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button} from "@nextui-org/react";
 
 interface DetailTVProps {
   data: DetailMovieInterface;
@@ -34,7 +35,7 @@ const DetailTV: React.FC<DetailTVProps> = ({
   console.log(seasonDetail);
 
   return (
-    <div className="min-h-screen w-full">
+    <div className="min-h-screen w-full dark">
       <div className="relative md:h-[350px] h-[300px] bg-black/40 bg-blend-overlay rounded-b-3xl overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent z-10 to-black/80 top-1/3"></div>
         <div className="absolute inset-0 bg-gradient-to-t from-transparent z-10 to-black/40 bottom-1/3"></div>
@@ -173,10 +174,26 @@ const DetailTV: React.FC<DetailTVProps> = ({
         </div>
 
         {/* Tập và mùa  */}
-        <div className="my-4">
-          <h3 className="my-3">Tập</h3>
-          <div className="flex w-full">
+        <div className="my-4 pt-4">
+          <div className="lg:flex w-full">
             {/* Chọn mùa  */}
+
+            {/* Select mobile */}
+            <div className="py-4">
+                <Dropdown className="bg-black">
+                  <DropdownTrigger>
+                    <Button variant="bordered" >{data.seasons[seasons].name}</Button>
+                  </DropdownTrigger>
+                  <DropdownMenu>
+                    {data.seasons.map((season: any, index: number) => (
+                      <DropdownItem onAction={() => setSeasons(index)} key={index}>
+                        <Link href={{ query: { season: String(index) } }}>{season.name}</Link>
+                      </DropdownItem>
+                    ))}
+                  </DropdownMenu>
+                </Dropdown>
+            </div>
+
             <div className="lg:block hidden">
               {data.seasons.map((season: any, index: number) => (
                 <div
@@ -211,7 +228,7 @@ const DetailTV: React.FC<DetailTVProps> = ({
 
                   <div className="w-full absolute bottom-0 p-2 space-y-1">
                     <p className="text-base line-clamp-1 font-semibold text-gray-300">
-                      {season.name}
+                      {season.name} : {season.overview}
                     </p>
                   </div>
                 </div>
