@@ -21,6 +21,7 @@ export interface LastestUpdateInterface {
 }
 
 export interface DetailMovieInterface {
+  seasons: any;
   id: any;
   name: ReactNode;
   first_air_date: any;

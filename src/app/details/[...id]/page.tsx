@@ -12,14 +12,17 @@ import getSimlilarMovie from "../../../../api/getSimlilarMovie";
 import getSimlilarTV from "../../../../api/getSimlilarTV";
 import getReviewsMovie from "../../../../api/getReviewsMovie";
 import getReviewsTV from "../../../../api/getReviewsTV";
+import getDetailsSeasons from "../../../../api/getDetailsSeasons";
 
 interface pageProps {
   params: {
     id: string;
-  };
+  },
+  searchParams: {[key:string]: string | string[] | undefined},
 }
 
-const page: React.FC<pageProps> = async ({ params }) => {
+const page: React.FC<pageProps> = async ({ params, searchParams }) => {
+  // console.log(searchParams.season)
   const id = params.id[1];
   const mediatype = params.id[0];
 
@@ -37,6 +40,8 @@ const page: React.FC<pageProps> = async ({ params }) => {
       : await getSimlilarTV(id);
   const reviews =
     mediatype === "movie" ? await getReviewsMovie(id) : await getReviewsTV(id);
+  
+  const seasonsDetail = await getDetailsSeasons(id,searchParams.season);
 
   return (
     <Layout>
@@ -55,6 +60,7 @@ const page: React.FC<pageProps> = async ({ params }) => {
           cast={credits}
           similar={similar}
           reviews={reviews}
+          seasonDetail={seasonsDetail}
         />
       )}
     </Layout>

@@ -51,7 +51,7 @@ export default function Recommendation({
       >
         {data.map((recom: any) => (
           <SwiperSlide>
-            <Link href={`/details/${recom.media_type}/${recom.id}/${recom.title || recom.name}`}>
+            <Link href={`/details/${recom.media_type || mediatype}/${recom.id}/${recom.title || recom.name}`}>
               <div className="relative max-w-[186px] h-[279px] cursor-pointer rounded-2xl overflow-hidden">
                 <Image
                   fill

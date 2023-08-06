@@ -1,6 +1,5 @@
 "use client";
-import Layout from "@/components/shared/Layout";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { DetailMovieInterface } from "@/lib/interface";
 import { Avatar, Badge, CircularProgress, Divider } from "@nextui-org/react";
@@ -8,18 +7,31 @@ import { BsFillPlayFill, BsSend } from "react-icons/bs";
 import { BiCommentDetail } from "react-icons/bi";
 import Recommendation from "@/components/shared/Recommendation";
 import Comment from "@/components/shared/Comment";
+import Link from "next/link";
 
 interface DetailTVProps {
   data: DetailMovieInterface;
   recommendation: any;
   cast: any;
-  reviews:any;
+  reviews: any;
   similar: any;
+  seasonDetail: any;
 }
 
-const DetailTV: React.FC<DetailTVProps> = ({ data, recommendation, cast, reviews, similar }) => {
+const DetailTV: React.FC<DetailTVProps> = ({
+  data,
+  recommendation,
+  cast,
+  reviews,
+  similar,
+  seasonDetail,
+}) => {
+  // const router = useRouter();
+  const [seasons, setSeasons] = useState(seasonDetail.season_number || 0);
+
   const director = cast.crew.filter((e: any) => e.job === "Director");
-  console.log(recommendation);
+
+  console.log(seasonDetail);
 
   return (
     <div className="min-h-screen w-full">
@@ -156,6 +168,52 @@ const DetailTV: React.FC<DetailTVProps> = ({ data, recommendation, cast, reviews
                     .join(", ")}
                 </p>
               </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Tập và mùa  */}
+        <div className="my-4">
+          <h3 className="my-3">Tập</h3>
+          <div className="flex w-full">
+            {/* Chọn mùa  */}
+            <div className="lg:block hidden">
+              {data.seasons.map((season: any, index: number) => (
+                <div
+                  onClick={() => {
+                    setSeasons(index);
+                  }}
+                  className={`p-4 w-[250px] rounded-l-xl text-gray-400 ${
+                    seasons === index && "bg-primary text-white"
+                  }`}
+                >
+                  <Link href={{ query: { season: String(index) } }}>
+                    <p className="font-bold text-sm">{season.name}</p>
+                    <p className="font-semibold">{season.episode_count} Tập</p>
+                  </Link>
+                </div>
+              ))}
+            </div>
+            {/* Chọn tập  */}
+            <div className="grid 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-3 grid-cols-2 gap-4 lg:px-6">
+              {seasonDetail.episodes.map((season: any) => (
+                <div className="relative">
+                  <Image
+                    src={`https://image.tmdb.org/t/p/w500${season.still_path}`}
+                    alt={season.name}
+                    width={350}
+                    height={150}
+                  />
+
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/80 top-1/3"></div>
+
+                  <div className="w-full absolute bottom-0 p-2 space-y-1">
+                    <p className="text-base line-clamp-1 font-semibold text-gray-300">
+                      {season.name}
+                    </p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
