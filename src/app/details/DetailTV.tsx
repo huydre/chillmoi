@@ -81,7 +81,7 @@ const DetailTV: React.FC<DetailTVProps> = ({
                 </h2>
                 <div className="flex items-center space-x-4">
                   <span className="bg-white text-black text-center py-[2px] text-sm font-semibold w-10 rounded-md">
-                    {data.first_air_date.slice(0, 4)}
+                    {/* {data.first_air_date.slice(0, 4)} */}
                   </span>
                   <span className="font-bold"> • </span>
                   <span>
@@ -122,7 +122,7 @@ const DetailTV: React.FC<DetailTVProps> = ({
                   Diễn viên
                 </p>
                 <div className="space-y-4">
-                  {cast
+                  {/* {cast
                     .sort(
                       (a: { popularity: number }, b: { popularity: number }) =>
                         a.popularity > b.popularity
@@ -142,7 +142,7 @@ const DetailTV: React.FC<DetailTVProps> = ({
                           <p className="text-sm">{casts.character}</p>
                         </div>
                       </div>
-                    ))}
+                    ))} */}
                 </div>
               </div>
             </div>

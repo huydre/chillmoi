@@ -9,7 +9,9 @@ import DetailMovie from "../DetailMovie";
 import Layout from "@/components/shared/Layout";
 import DetailTV from "../DetailTV";
 import getSimlilarMovie from "../../../../api/getSimlilarMovie"
+import getSimlilarTV from "../../../../api/getSimlilarTV"
 import getReviewsMovie from "../../../../api/getReviewsMovie"
+import getReviewsTV from "../../../../api/getReviewsTV"
 
 interface pageProps {
   params: {
@@ -24,8 +26,8 @@ const page: React.FC<pageProps> = async ({ params }) => {
   const details = mediatype === "movie" ? await getDetailMovie(id) : await getDetailsTV(id);
   const recommendation = mediatype === "movie" ? await getRecommendationMovie(id) : getRecommendationTV(id);
   const credits = mediatype === "movie" ? await getCreditsMovie(id) : await getCreditsTV(id);
-  const similar = await getSimlilarMovie(id);
-  const reviews = await getReviewsMovie(id);
+  const similar = mediatype === "movie" ? await getSimlilarMovie(id) : await getSimlilarTV(id);
+  const reviews = mediatype === "movie" ? await getReviewsMovie(id) : await getReviewsTV(id);
 
   return (
     <Layout>
