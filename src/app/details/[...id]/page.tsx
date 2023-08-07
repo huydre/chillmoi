@@ -22,7 +22,6 @@ interface pageProps {
 }
 
 const page: React.FC<pageProps> = async ({ params, searchParams }) => {
-  // console.log(searchParams.season)
   const id = params.id[1];
   const mediatype = params.id[0];
 
@@ -42,8 +41,11 @@ const page: React.FC<pageProps> = async ({ params, searchParams }) => {
     mediatype === "movie" ? await getReviewsMovie(id) : await getReviewsTV(id);
   
   // get all episode of series 
-  const promises = mediatype === "tv" && details.seasons.map((season: any, index: number) => getDetailsSeasons(id,index))
+  const promises = mediatype === "tv" && details.seasons.map((season: any, index: number) => getDetailsSeasons(id,season.season_number))
   const seasonsDetails = mediatype === "tv" && await Promise.all(promises)
+
+
+  console.log(details)
 
   return (
     <Layout>

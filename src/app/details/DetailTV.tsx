@@ -31,13 +31,10 @@ const DetailTV: React.FC<DetailTVProps> = ({
   similar,
   seasonDetail,
 }) => {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const [seasons, setSeasons] = useState(seasonDetail.season_number || 0);
 
   const director = cast.crew.filter((e: any) => e.job === "Director");
 
-  console.log(seasonDetail)
+  console.log(data)
 
   return (
     <div className="min-h-screen w-full dark">
