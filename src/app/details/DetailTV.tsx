@@ -11,6 +11,7 @@ import Link from "next/link";
 import { Select, Option, select } from "@material-tailwind/react";
 import { useSearchParams } from "next/navigation";
 import Loading from "@/components/shared/Loading";
+import { useRouter } from "next/navigation";
 
 interface DetailTVProps {
   data: DetailMovieInterface;
@@ -29,10 +30,13 @@ const DetailTV: React.FC<DetailTVProps> = ({
   similar,
   seasonDetail,
 }) => {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const [seasons, setSeasons] = useState(seasonDetail.season_number || 0);
 
   const director = cast.crew.filter((e: any) => e.job === "Director");
+
+  console.log(seasonDetail)
 
   return (
     <div className="min-h-screen w-full dark">
@@ -110,7 +114,7 @@ const DetailTV: React.FC<DetailTVProps> = ({
 
                 <div className="flex space-x-8">
                   <a
-                    href={`/watch/movie/${data.id}/${data.title}`}
+                    href={`/watch/tv/${data.id}/${data.name}?season=0&episode=1`}
                     className="ring-2 ring-primary bg-primary text-sm font-semibold px-4 py-2 rounded-full  transition duration-200 ease-in-out flex space-x-2 items-center"
                   >
                     <BsFillPlayFill />
@@ -188,9 +192,9 @@ const DetailTV: React.FC<DetailTVProps> = ({
                 label="Chọn mùa"
                 selected={seasons}
               >
-                {data.seasons.map((season: any, index: number) => (
+                {seasonDetail.map((season: any, index: number) => (
                   <Option key={index} value={String(index)}>
-                    <Link href={{ query: { season: String(index) } }}>
+                    <Link scroll={false} href={{ query: { season: String(index) } }}>
                       {season.name}
                     </Link>
                   </Option>
@@ -205,25 +209,27 @@ const DetailTV: React.FC<DetailTVProps> = ({
                   onClick={() => {
                     setSeasons(index);
                   }}
-                  className={`p-4 w-[250px] rounded-l-xl text-gray-400 ${
+                  className={`p-4 w-[250px] rounded-l-xl ring-r-1 ring-primary text-gray-400 ${
                     seasons === index && "bg-primary text-white"
                   }`}
                 >
-                  <Link scroll={false} href={{ query: { season: String(index) } }}>
+                  <div >
                     <p className="font-bold text-sm">{season.name}</p>
                     <p className="font-semibold">{season.episode_count} Tập</p>
-                  </Link>
+                  </div>
                 </div>
               ))}
             </div>
             {/* Chọn tập  */}
 
-            {seasonDetail.name !== data.seasons[seasons].name ? (
-              <div className="w-full"><Loading /></div>
+            {
+            // seasonDetail.name !== data.seasons[seasons].name ? (
+            //   <div className="w-full"><Loading /></div>
               
-            ) : (
+            // ) : 
+            (
               <div className="w-full grid 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-3 grid-cols-2 gap-4 lg:px-6 h-min">
-                {seasonDetail.episodes.map((season: any) => (
+                {seasonDetail[seasons].episodes.map((season: any) => (
                   <div className="relative h-[150px] w-full overflow-hidden rounded-xl">
                     <Image
                       src={`https://image.tmdb.org/t/p/w500${season.still_path}`}
@@ -237,9 +243,10 @@ const DetailTV: React.FC<DetailTVProps> = ({
                     <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black top-1/4"></div>
 
                     <div className="absolute grid grid-cols-1 place-content-center w-full h-full justify-items-center">
-                      <button className="bg-gray-900/50 rounded-full text-center p-2 opacity-70">
+                      <Link href={`/watch/tv/${data.id}/${data.name}?season=${seasons}&episode=${season.episode_number}`}
+                       className="bg-gray-900/50 rounded-full text-center p-2 opacity-70">
                         <BsPlay size="2em" />
-                      </button>
+                      </Link>
                     </div>
 
                     <div className="w-full absolute bottom-0 p-2 space-y-1">

@@ -4,7 +4,7 @@ import React from 'react'
 
 export default function Loading() {
   return (
-    <div className='h-screen grid grid-cols-1 place-content-center'>
+    <div className='h-full grid grid-cols-1 place-content-center'>
       <Spinner size="lg"/>
     </div>
   )

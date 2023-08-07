@@ -8,7 +8,7 @@ export interface WatchSectionProps {
   recommend: any;
 }
 
-const WatchSection = ({ id, data, recommend }: WatchSectionProps) => {
+const WatchMovieSection = ({ id, data, recommend }: WatchSectionProps) => {
   console.log(data);
   return (
     <div className="min-h-screen pt-[70px]">
@@ -38,4 +38,4 @@ const WatchSection = ({ id, data, recommend }: WatchSectionProps) => {
   );
 };
 
-export default WatchSection;
+export default WatchMovieSection;

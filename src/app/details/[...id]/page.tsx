@@ -41,7 +41,9 @@ const page: React.FC<pageProps> = async ({ params, searchParams }) => {
   const reviews =
     mediatype === "movie" ? await getReviewsMovie(id) : await getReviewsTV(id);
   
-  const seasonsDetail = mediatype === "tv" && await getDetailsSeasons(id,searchParams.season);
+  // get all episode of series 
+  const promises = details.seasons.map((season: any, index: number) => getDetailsSeasons(id,index))
+  const seasonsDetails = await Promise.all(promises)
 
   return (
     <Layout>
@@ -60,7 +62,7 @@ const page: React.FC<pageProps> = async ({ params, searchParams }) => {
           cast={credits}
           similar={similar}
           reviews={reviews}
-          seasonDetail={seasonsDetail}
+          seasonDetail={seasonsDetails}
         />
       )}
     </Layout>
