@@ -20,6 +20,7 @@ export default function SeasonAndEpisode({
   const [seasons, setSeasons] = useState(
     Number(searchParams.get("season")) || 0
   );
+
   return (
     <div className="my-4 pt-4">
       <div className="lg:flex w-full">
@@ -67,7 +68,7 @@ export default function SeasonAndEpisode({
         {
           <div className="w-full grid 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-3 grid-cols-2 gap-4 lg:px-6 h-min">
             {seasonDetail[seasons].episodes.map((season: any) => (
-              <div className="relative h-[150px] w-full overflow-hidden rounded-xl">
+              <div className="relative h-[150px] w-full overflow-hidden rounded-lg">
                 <Image
                   src={`https://image.tmdb.org/t/p/w500${season.still_path}`}
                   alt={season.name}
@@ -77,19 +78,29 @@ export default function SeasonAndEpisode({
                   }}
                 />
 
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black top-1/4"></div>
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black top-1/3"></div>
+
+                {searchParams.get("season") == String(seasons) &&
+                searchParams.get("episode") == season.episode_number ? (
+                  <div className="absolute bg-red-500 bottom-0 h-0.5 w-1/3" />
+                ) : <></>}
 
                 <div className="absolute grid grid-cols-1 place-content-center w-full h-full justify-items-center">
                   <Link
                     href={`/watch/tv/${data.id}/${data.name}?season=${seasons}&episode=${season.episode_number}`}
                     className="bg-gray-900/50 rounded-full text-center p-2 opacity-70"
                   >
-                    <BsPlay size="2em" />
+                    {searchParams.get("season") == String(seasons) &&
+                    searchParams.get("episode") == season.episode_number ? (
+                      <></>
+                    ) : (
+                      <BsPlay size="2em" />
+                    )}
                   </Link>
                 </div>
 
-                <div className="w-full absolute bottom-0 p-2 space-y-1">
-                  <p className="text-base line-clamp-1 font-semibold text-gray-300">
+                <div className="w-full absolute bottom-1 p-2 space-y-1">
+                  <p className=" line-clamp-1 font-medium text-gray-300 text-sm">
                     {season.name} : {season.overview}
                   </p>
                 </div>
