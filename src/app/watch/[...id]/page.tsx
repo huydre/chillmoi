@@ -28,8 +28,8 @@ const Page = async ({ params, searchParams }: pageProps) => {
       : await getRecommendationTV(id);
   const episodeDetails = mediatype === "tv" && await getEpisodeDetails(id,searchParams.season, searchParams.episode)
 
-  const promises = details.seasons.map((season: any, index: number) => getDetailsSeasons(id,index))
-  const seasonsDetails = await Promise.all(promises)
+  const promises = mediatype === "tv" && details.seasons.map((season: any, index: number) => getDetailsSeasons(id,index))
+  const seasonsDetails = mediatype === "tv" && await Promise.all(promises)
 
   return (
     <Layout>
