@@ -206,7 +206,7 @@ const Discovery = ({ data, genres }: any) => {
         </div>
       </div> */}
 
-      <div className="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-8 py-32">
+      <div className="md:grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-8 pt-24 hidden">
         {data.results.map((i: any) => (
           <Link href={`details/${i.media_type}/${i.id}/${i.title || i.name}`}>
             <div className="relative max-w-[230px] h-[345px] bg-blue-500">
