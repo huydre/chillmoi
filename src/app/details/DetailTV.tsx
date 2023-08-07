@@ -2,13 +2,14 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { DetailMovieInterface } from "@/lib/interface";
-import { Avatar, Badge, CircularProgress, Divider } from "@nextui-org/react";
+import { Badge, CircularProgress } from "@nextui-org/react";
 import { BsFillPlayFill, BsSend, BsPlay } from "react-icons/bs";
 import { BiCommentDetail } from "react-icons/bi";
 import Recommendation from "@/components/shared/Recommendation";
 import Comment from "@/components/shared/Comment";
 import Link from "next/link";
-import {Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button} from "@nextui-org/react";
+import { Select, Option } from "@material-tailwind/react";
+import { useSearchParams } from "next/navigation";
 
 interface DetailTVProps {
   data: DetailMovieInterface;
@@ -27,13 +28,12 @@ const DetailTV: React.FC<DetailTVProps> = ({
   similar,
   seasonDetail,
 }) => {
-  // const router = useRouter();
+  const searchParams = useSearchParams();
   const [seasons, setSeasons] = useState(seasonDetail.season_number || 0);
 
   const director = cast.crew.filter((e: any) => e.job === "Director");
 
-  console.log(seasonDetail);
-
+  console.log(seasonDetail)
   return (
     <div className="min-h-screen w-full dark">
       <div className="relative md:h-[350px] h-[300px] bg-black/40 bg-blend-overlay rounded-b-3xl overflow-hidden">
@@ -179,19 +179,17 @@ const DetailTV: React.FC<DetailTVProps> = ({
             {/* Chọn mùa  */}
 
             {/* Select mobile */}
-            <div className="py-4 lg:hidden">
-                <Dropdown className="bg-black text-white">
-                  <DropdownTrigger>
-                    <Button variant="bordered" >{data.seasons[seasons].name}</Button>
-                  </DropdownTrigger>
-                  <DropdownMenu>
-                    {data.seasons.map((season: any, index: number) => (
-                      <DropdownItem onAction={() => setSeasons(index)} key={index}>
+            <div className="py-4 lg:hidden w-1/3">
+                <Select size="lg" label="Chọn mùa" selected={seasons}>
+                  {
+                    data.seasons.map((season: any, index: number) => (
+                      <Option key={index} onChange={() => setSeasons(index)}>
                         <Link href={{ query: { season: String(index) } }}>{season.name}</Link>
-                      </DropdownItem>
-                    ))}
-                  </DropdownMenu>
-                </Dropdown>
+                      </Option>
+                    ))
+                  }
+                </Select>
+                <h5 className="mt-4">{seasonDetail.name}</h5>
             </div>
 
             <div className="lg:block hidden">
