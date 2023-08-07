@@ -1,17 +1,34 @@
 "use client";
-import React from "react";
-import {
-  Dropdown,
-  DropdownTrigger,
-  DropdownMenu,
-  DropdownItem,
-  Button,
-} from "@nextui-org/react";
+import React, { useCallback } from "react";
+import {Pagination} from "@nextui-org/react";
 import Image from "next/image";
 import { AiOutlinePlus } from "react-icons/ai";
+import Link from "next/link";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 const Discovery = ({ data }: any) => {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+
+  const createQueryString = useCallback(
+    (name: any, value: any) => {
+      const params = new URLSearchParams(searchParams.toString());
+      params.set(name, value);
+
+      return params.toString();
+    },
+    [searchParams]
+  );
+
+  const handlePagination = (e: any) => {
+    router.replace(pathname + "?" + createQueryString("page", e))
+    console.log(e);
+  }
+
   console.log(data);
+
   return (
     <div className="min-h-screen pt-[70px] 2xl:px-[100px] px-4 dark">
       <div className="md:flex justify-between items-center my-3">
@@ -24,7 +41,7 @@ const Discovery = ({ data }: any) => {
 
       <div className="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-8">
         {data.results.map((i: any) => (
-          <div>
+          <Link href={`details/${i.media_type}/${i.id}/${i.title || i.name}`}>
             <div className="relative max-w-[230px] h-[345px] bg-blue-500">
               <Image
                 src={`https://image.tmdb.org/t/p/w500${i.poster_path}`}
@@ -53,9 +70,14 @@ const Discovery = ({ data }: any) => {
                 <AiOutlinePlus />
               </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
+      
+      <div className="w-full flex justify-center mt-6">
+        <Pagination showControls total={data.total_pages} initialPage={Number(searchParams.get("page")) || 1} onChange={handlePagination}/>
+      </div>
+
     </div>
   );
 };
