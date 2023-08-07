@@ -20,6 +20,7 @@ module.exports = withMT({
     extend: {
       colors: {
         'primary' : '#5179FF',
+        'background': '#0E0E10',
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

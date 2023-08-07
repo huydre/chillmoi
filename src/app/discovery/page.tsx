@@ -2,6 +2,7 @@ import Discovery from '@/components/Discovery/Discovery'
 import Layout from '@/components/shared/Layout'
 import React from 'react'
 import getTrendingAll from '../../../api/getTrendingAll'
+import getGenres from '../../../api/getGenres'
 
 interface pageProps {
   params: {
@@ -14,10 +15,11 @@ const page = async ({ params, searchParams }: pageProps) => {
 
   const page = searchParams.page || "1";
   const trending = await getTrendingAll(page);
+  const genres = await getGenres();
 
   return (
     <Layout>
-        <Discovery data={trending} />
+        <Discovery data={trending} genres={genres}/>
     </Layout>
   )
 }
