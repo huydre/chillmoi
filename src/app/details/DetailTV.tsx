@@ -8,8 +8,9 @@ import { BiCommentDetail } from "react-icons/bi";
 import Recommendation from "@/components/shared/Recommendation";
 import Comment from "@/components/shared/Comment";
 import Link from "next/link";
-import { Select, Option } from "@material-tailwind/react";
+import { Select, Option, select } from "@material-tailwind/react";
 import { useSearchParams } from "next/navigation";
+import Loading from "@/components/shared/Loading";
 
 interface DetailTVProps {
   data: DetailMovieInterface;
@@ -33,7 +34,8 @@ const DetailTV: React.FC<DetailTVProps> = ({
 
   const director = cast.crew.filter((e: any) => e.job === "Director");
 
-  console.log(seasonDetail)
+  console.log(seasonDetail.name + " vs " + data.seasons[seasons].name);
+
   return (
     <div className="min-h-screen w-full dark">
       <div className="relative md:h-[350px] h-[300px] bg-black/40 bg-blend-overlay rounded-b-3xl overflow-hidden">
@@ -180,16 +182,23 @@ const DetailTV: React.FC<DetailTVProps> = ({
 
             {/* Select mobile */}
             <div className="py-4 lg:hidden w-1/3">
-                <Select size="lg" label="Chọn mùa" selected={seasons}>
-                  {
-                    data.seasons.map((season: any, index: number) => (
-                      <Option key={index} onChange={() => setSeasons(index)}>
-                        <Link href={{ query: { season: String(index) } }}>{season.name}</Link>
-                      </Option>
-                    ))
-                  }
-                </Select>
-                <h5 className="mt-4">{seasonDetail.name}</h5>
+              <Select
+                onChange={(e) => {
+                  setSeasons(Number(e));
+                }}
+                size="lg"
+                label="Chọn mùa"
+                selected={seasons}
+              >
+                {data.seasons.map((season: any, index: number) => (
+                  <Option index={index} value={String(index)}>
+                    <Link href={{ query: { season: String(index) } }}>
+                      {season.name}
+                    </Link>
+                  </Option>
+                ))}
+              </Select>
+              <h5 className="mt-4">{seasonDetail.name}</h5>
             </div>
 
             <div className="lg:block hidden">
@@ -202,7 +211,7 @@ const DetailTV: React.FC<DetailTVProps> = ({
                     seasons === index && "bg-primary text-white"
                   }`}
                 >
-                  <Link href={{ query: { season: String(index) } }}>
+                  <Link scroll={false} href={{ query: { season: String(index) } }}>
                     <p className="font-bold text-sm">{season.name}</p>
                     <p className="font-semibold">{season.episode_count} Tập</p>
                   </Link>
@@ -210,32 +219,40 @@ const DetailTV: React.FC<DetailTVProps> = ({
               ))}
             </div>
             {/* Chọn tập  */}
-            <div className="w-full grid 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-3 grid-cols-2 gap-4 lg:px-6 h-min">
-              {seasonDetail.episodes.map((season: any) => (
-                <div className="relative h-[150px] w-full overflow-hidden rounded-xl">
-                  <Image
-                    src={`https://image.tmdb.org/t/p/w500${season.still_path}`}
-                    alt={season.name}
-                    fill
-                    style={{
-                      objectFit: "cover",
-                    }}
-                  />
 
-                  <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black top-1/4"></div>
+            {seasonDetail.name !== data.seasons[seasons].name ? (
+              <div className="w-full"><Loading /></div>
+              
+            ) : (
+              <div className="w-full grid 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-3 grid-cols-2 gap-4 lg:px-6 h-min">
+                {seasonDetail.episodes.map((season: any) => (
+                  <div className="relative h-[150px] w-full overflow-hidden rounded-xl">
+                    <Image
+                      src={`https://image.tmdb.org/t/p/w500${season.still_path}`}
+                      alt={season.name}
+                      fill
+                      style={{
+                        objectFit: "cover",
+                      }}
+                    />
 
-                  <div className="absolute grid grid-cols-1 place-content-center w-full h-full justify-items-center">
-                    <button className="bg-gray-900/50 rounded-full text-center p-2 opacity-70"><BsPlay size="2em"/></button>
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black top-1/4"></div>
+
+                    <div className="absolute grid grid-cols-1 place-content-center w-full h-full justify-items-center">
+                      <button className="bg-gray-900/50 rounded-full text-center p-2 opacity-70">
+                        <BsPlay size="2em" />
+                      </button>
+                    </div>
+
+                    <div className="w-full absolute bottom-0 p-2 space-y-1">
+                      <p className="text-base line-clamp-1 font-semibold text-gray-300">
+                        {season.name} : {season.overview}
+                      </p>
+                    </div>
                   </div>
-
-                  <div className="w-full absolute bottom-0 p-2 space-y-1">
-                    <p className="text-base line-clamp-1 font-semibold text-gray-300">
-                      {season.name} : {season.overview}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
 
