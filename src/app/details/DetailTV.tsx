@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { DetailMovieInterface } from "@/lib/interface";
 import { Avatar, Badge, CircularProgress, Divider } from "@nextui-org/react";
-import { BsFillPlayFill, BsSend } from "react-icons/bs";
+import { BsFillPlayFill, BsSend, BsPlay } from "react-icons/bs";
 import { BiCommentDetail } from "react-icons/bi";
 import Recommendation from "@/components/shared/Recommendation";
 import Comment from "@/components/shared/Comment";
@@ -179,7 +179,7 @@ const DetailTV: React.FC<DetailTVProps> = ({
             {/* Chọn mùa  */}
 
             {/* Select mobile */}
-            <div className="py-4">
+            <div className="py-4 lg:hidden">
                 <Dropdown className="bg-black text-white">
                   <DropdownTrigger>
                     <Button variant="bordered" >{data.seasons[seasons].name}</Button>
@@ -214,7 +214,7 @@ const DetailTV: React.FC<DetailTVProps> = ({
             {/* Chọn tập  */}
             <div className="w-full grid 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-3 grid-cols-2 gap-4 lg:px-6 h-min">
               {seasonDetail.episodes.map((season: any) => (
-                <div className="relative h-[150px] w-full overflow-hidden">
+                <div className="relative h-[150px] w-full overflow-hidden rounded-xl">
                   <Image
                     src={`https://image.tmdb.org/t/p/w500${season.still_path}`}
                     alt={season.name}
@@ -225,6 +225,10 @@ const DetailTV: React.FC<DetailTVProps> = ({
                   />
 
                   <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black top-1/4"></div>
+
+                  <div className="absolute grid grid-cols-1 place-content-center w-full h-full justify-items-center">
+                    <button className="bg-gray-900/50 rounded-full text-center p-2 opacity-70"><BsPlay size="2em"/></button>
+                  </div>
 
                   <div className="w-full absolute bottom-0 p-2 space-y-1">
                     <p className="text-base line-clamp-1 font-semibold text-gray-300">
