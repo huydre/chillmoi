@@ -34,8 +34,6 @@ const DetailTV: React.FC<DetailTVProps> = ({
 
   const director = cast.crew.filter((e: any) => e.job === "Director");
 
-  console.log(seasonDetail.name + " vs " + data.seasons[seasons].name);
-
   return (
     <div className="min-h-screen w-full dark">
       <div className="relative md:h-[350px] h-[300px] bg-black/40 bg-blend-overlay rounded-b-3xl overflow-hidden">
@@ -191,14 +189,14 @@ const DetailTV: React.FC<DetailTVProps> = ({
                 selected={seasons}
               >
                 {data.seasons.map((season: any, index: number) => (
-                  <Option index={index} value={String(index)}>
+                  <Option key={index} value={String(index)}>
                     <Link href={{ query: { season: String(index) } }}>
                       {season.name}
                     </Link>
                   </Option>
                 ))}
               </Select>
-              <h5 className="mt-4">{seasonDetail.name}</h5>
+              <h5 className="mt-4">{data.seasons[seasons].name}</h5>
             </div>
 
             <div className="lg:block hidden">
