@@ -41,7 +41,7 @@ const page: React.FC<pageProps> = async ({ params, searchParams }) => {
   const reviews =
     mediatype === "movie" ? await getReviewsMovie(id) : await getReviewsTV(id);
   
-  const seasonsDetail = await getDetailsSeasons(id,searchParams.season);
+  const seasonsDetail = mediatype === "tv" && await getDetailsSeasons(id,searchParams.season);
 
   return (
     <Layout>
