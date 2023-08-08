@@ -19,7 +19,6 @@ const LastestUpdate = ({
   mediatype?: string;
 }) => {
   const swiperRef = useRef<SwiperCore | null>(null);
-  // console.log(data);
 
   return (
     <div className="py-4 px-2">

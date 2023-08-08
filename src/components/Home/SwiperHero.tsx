@@ -36,7 +36,6 @@ const SwiperHero = ({ data }: SwiperHeroProps) => {
     return Number(indexSlide);
   };
 
-  // console.log(heroData);
 
   return (
     <div className="w-[calc(100% - 74px)]">

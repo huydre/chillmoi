@@ -44,9 +44,6 @@ const page: React.FC<pageProps> = async ({ params, searchParams }) => {
   const promises = mediatype === "tv" && details.seasons.map((season: any, index: number) => getDetailsSeasons(id,season.season_number))
   const seasonsDetails = mediatype === "tv" && await Promise.all(promises)
 
-
-  console.log(details)
-
   return (
     <Layout>
       {mediatype === "movie" ? (

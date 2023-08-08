@@ -7,54 +7,75 @@ import {
   PopoverTrigger,
   PopoverContent,
   Divider,
-  RadioGroup,
-  Radio,
 } from "@nextui-org/react";
 import Image from "next/image";
 import { AiOutlinePlus } from "react-icons/ai";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { Select, Option } from "@material-tailwind/react";
 import { FiSearch } from "react-icons/fi";
+import { sortBy } from "@/constant";
 
-const Discovery = ({ data, genres }: any) => {
+const Discovery = ({ data, genres, mediatype, title }: any) => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
   const [selectGenres, setSelectGenres] = useState({
-    id: 0,
-    name: "Tất cả",
+    id: searchParams.get("with_genres") || "0",
+    name: genres.genres.find((i: any) => i.id == searchParams.get("with_genres"))?.name || "Tất cả",
   });
-  const [selectFormat, setSelectFormat] = useState("Tất cả");
-  const [selectYear, setSelectYear] = useState("Tất cả");
-
-  const createQueryString = useCallback(
-    (name: any, value: any) => {
-      const params = new URLSearchParams(searchParams.toString());
-      params.set(name, value);
-
-      return params.toString();
-    },
-    [searchParams]
-  );
+  const [selectSort, setSelectSort] = useState({
+    name: sortBy.find((i) => i.value === searchParams.get("sort_by"))?.name || "Mặc định",
+    value: searchParams.get("sort_by") || "",
+  });
+  const [selectYear, setSelectYear] = useState(searchParams.get("year") || "Tất cả");
 
   let yearsArray = [];
-
-  // Sử dụng vòng lặp để thêm các số từ 1980 đến 2023 vào mảng
   for (let year = 2023; year >= 1980; year--) {
     yearsArray.push(year);
   }
 
   const handlePagination = (e: any) => {
-    router.replace(pathname + "?" + createQueryString("page", e));
-    console.log(e);
+    const current = new URLSearchParams(Array.from(searchParams.entries()));
+
+    current.set("page",e.toString())
+
+    const search = current.toString();
+    const query = search ? `?${search}` : "";
+
+    router.push(`${pathname}${query}`);
+
   };
 
-  console.log(genres);
+  const handleSearch = () => {
+    const current = new URLSearchParams(Array.from(searchParams.entries()));
+
+    if (selectGenres.name === "Tất cả") {
+      current.delete("with_genres");
+    }
+    else current.set("with_genres",selectGenres.id.toString())
+
+    if (selectSort.name === "Mặc định") {
+      current.delete("sort_by");
+    }
+    else current.set("sort_by",selectSort.value)
+
+    if (selectYear === "Tất cả") {
+      current.delete("year");
+    }
+    else current.set("year",selectYear)
+
+    const search = current.toString();
+    const query = search ? `?${search}` : "";
+
+    router.push(`${pathname}${query}`);
+  };
+
+  console.log(genres)
+
 
   return (
-    <div className="min-h-screen 2xl:px-[100px] dark">
+    <div className="min-h-screen dark">
       <div className="relative h-[320px]">
         <Image
           src={"/discovey_banner.jpg"}
@@ -70,7 +91,7 @@ const Discovery = ({ data, genres }: any) => {
         <div className="absolute inset-0 bg-background/40 top-0 bg-blend-overlay"></div>
 
         <div className="absolute text-center w-full top-1/3">
-          <h1 className="text-[2.875rem]">Danh mục</h1>
+          <h1 className="text-[2.875rem]">{title}</h1>
           <p className="text-[1.25rem]">
             Khám phá và thưởng thức các bộ phim điện ảnh, series, anime
           </p>
@@ -118,46 +139,28 @@ const Discovery = ({ data, genres }: any) => {
                 <Popover placement="bottom">
                   <PopoverTrigger>
                     <div className="cursor-pointer">
-                      <p className="text-xs text-gray-400 truncate">
-                        Định dạng
-                      </p>
-                      <p className="font-semibold text-sm truncate">
-                        {(selectFormat === "movie" && "Phim lẻ") ||
-                          (selectFormat === "tv" && "Phim bộ") ||
-                          selectFormat}
+                      <p className="text-xs text-gray-400 truncate">Sắp xếp</p>
+                      <p className="font-semibold text-sm truncate max-w-[70px] md:max-w-full">
+                        {selectSort.name}
                       </p>
                     </div>
                   </PopoverTrigger>
                   <PopoverContent className="bg-gray-900 max-h-[360px] overflow-y-auto">
                     <ul className="">
-                      <li>
-                        <div
-                          onClick={() => {
-                            setSelectFormat("movie");
-                          }}
-                          className={`py-2 px-4 cursor-pointer text-white rounded-xl ${
-                            selectFormat === "movie"
-                              ? "bg-primary"
-                              : "hover:bg-gray-800"
-                          }`}
-                        >
-                          Phim lẻ
-                        </div>
-                      </li>
-                      <li>
-                        <div
-                          onClick={() => {
-                            setSelectFormat("tv");
-                          }}
-                          className={`py-2 px-4 text-white cursor-pointer rounded-xl ${
-                            selectFormat === "tv"
-                              ? "bg-primary"
-                              : "hover:bg-gray-800"
-                          }`}
-                        >
-                          Phim bộ
-                        </div>
-                      </li>
+                      {sortBy.map((i) => (
+                        <li>
+                          <div
+                            onClick={() => setSelectSort(i)}
+                            className={`py-2 px-4 cursor-pointer text-white rounded-xl ${
+                              i.value === selectSort.value
+                                ? "bg-primary"
+                                : "hover:bg-gray-800"
+                            }`}
+                          >
+                            {i.name}
+                          </div>
+                        </li>
+                      ))}
                     </ul>
                   </PopoverContent>
                 </Popover>
@@ -166,7 +169,6 @@ const Discovery = ({ data, genres }: any) => {
               <li>
                 <Popover placement="bottom">
                   <PopoverTrigger>
-                    {/* <Button>Thể loại</Button> */}
                     <div className="cursor-pointer">
                       <p className="text-xs text-gray-400">Năm</p>
                       <p className="font-semibold text-sm truncate w-[50px]">
@@ -183,7 +185,7 @@ const Discovery = ({ data, genres }: any) => {
                               setSelectYear(i);
                             }}
                             className={`py-2 px-4 cursor-pointer text-white rounded-xl ${
-                              selectYear === i
+                              selectYear == i
                                 ? "bg-primary"
                                 : "hover:bg-gray-800"
                             }`}
@@ -198,10 +200,12 @@ const Discovery = ({ data, genres }: any) => {
               </li>
             </ul>
             <div className="hidden md:block">
-              <Button color="primary">Tìm kiếm</Button>
+              <Button onClick={handleSearch} color="primary">
+                Tìm kiếm
+              </Button>
             </div>
             <div className="w-min md:hidden">
-              <Button isIconOnly color="primary">
+              <Button onClick={handleSearch} isIconOnly color="primary">
                 <FiSearch size="1.5em" />
               </Button>
             </div>
@@ -209,9 +213,9 @@ const Discovery = ({ data, genres }: any) => {
         </div>
       </div>
 
-      <div className="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-8 md:pt-24 pt-10 px-4">
+      <div className="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-8 md:pt-24 pt-10 px-4 2xl:px-[100px]">
         {data.results.map((i: any) => (
-          <Link href={`details/${i.media_type}/${i.id}/${i.title || i.name}`}>
+          <Link href={`/details/${mediatype}/${i.id}/${i.title || i.name}`}>
             <div className="relative max-w-[230px] h-[345px]">
               <Image
                 src={`https://image.tmdb.org/t/p/w500${i.poster_path}`}
@@ -229,7 +233,7 @@ const Discovery = ({ data, genres }: any) => {
                 </p>
                 <div className="flex space-x-2 text-[0.8rem] font-medium">
                   <p className="text-primary capitalize font-semibold">
-                    {i.media_type === "movie" ? "Phim lẻ" : "Phim bộ"}
+                    {mediatype === "movie" ? "Phim lẻ" : "Phim bộ"}
                   </p>
                   <span>-</span>
                   <p className="text-gray-500 truncate"></p>
@@ -244,7 +248,7 @@ const Discovery = ({ data, genres }: any) => {
         ))}
       </div>
 
-      <div className="w-full flex justify-center mt-6 px-4">
+      <div className="w-full flex justify-center mt-6 px-4 2xl:px-[100px]">
         <Pagination
           showControls
           total={data.total_pages}

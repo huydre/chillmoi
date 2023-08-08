@@ -6,15 +6,16 @@ import React, { useEffect, useState } from "react";
 import Library from "@/lib/icon/Library";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Monitor from "@/lib/icon/Monitor";
 
 export default function MobileNavbar() {
   const pathname = usePathname();
 
   const Menus = [
-    { name: "Trang chủ", icon: <HomeIcon />, dis: "translate-x-10", path: "/" },
-    { name: "Khám phá", icon: <DiscoverIcon />, dis: "translate-x-32", path: "/discovery" },
-    { name: "Chủ đề", icon: <Library />, dis: "translate-x-52", path: "/genres" },
-    { name: "Lịch phát sóng", icon: <ScheduleIcon />, dis: "translate-x-72", path: "/schedule" },
+    { name: "Trang chủ", icon: <HomeIcon />, path: "/" },
+    { name: "Phim lẻ", icon: <Monitor />, path: "/discovery/movie" },
+    { name: "Phim bộ", icon: <Library />, path: "/discovery/tv" },
+    { name: "Lịch phát sóng", icon: <ScheduleIcon />, path: "/schedule" },
   ];
 
   const [active, setActive] = useState(-1);

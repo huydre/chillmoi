@@ -25,7 +25,6 @@ const DetailMovie: React.FC<DetailMovieProps> = ({
   reviews,
 }) => {
   const director = cast.crew.filter((e: any) => e.job === "Director");
-  console.log(data);
 
   return (
     <div className="min-h-screen w-full">

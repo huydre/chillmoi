@@ -8,12 +8,12 @@ import Library from "@/lib/icon/Library";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { PiMonitor } from "react-icons/pi"
+import Monitor from "@/lib/icon/Monitor";
 
 const Menus = [
   { name: "Trang chủ", icon: <HomeIcon />, path: "/" },
-  { name: "Khám phá", icon: <DiscoverIcon />, path: "/discovery" },
-  { name: "Chủ đề", icon: <Library />, path: "/genres" },
+  { name: "Phim lẻ", icon: <Monitor />, path: "/discovery/movie" },
+  { name: "Phim bộ", icon: <Library />, path: "/discovery/tv" },
   { name: "Lịch phát sóng", icon: <ScheduleIcon />, path: "/schedule" },
 ];
 

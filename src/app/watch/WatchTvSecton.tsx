@@ -22,7 +22,6 @@ const WatchTvSection = ({
   const searchParams = useSearchParams();
   const season = Number(searchParams.get("season")) + 1;
 
-  console.log(data);
   return (
     <div className="min-h-screen pt-[70px]">
       <iframe

@@ -107,3 +107,46 @@ export const movieGenres = [
         "name": "Western"
     }
 ]
+
+export const sortBy = [
+    {
+        name: "Phổ biến tăng dần",
+        value: "popularity.asc",
+    },
+    {
+        name: "Phổ biến giảm dần",
+        value: "popularity.desc",
+    },
+    {
+        name: "Doanh thu tăng dần",
+        value: "revenue.asc",
+    },
+    {
+        name: "Doanh thu giảm dần",
+        value: "revenue.desc",
+    },
+    {
+        name: "Ngày phát hành tăng dần",
+        value: "primary_release_date.asc",
+    },
+    {
+        name: "Ngày phát hành giảm dần",
+        value: "primary_release_date.desc",
+    },
+    {
+        name: "Điểm trung bình tăng dần",
+        value: "vote_average.asc",
+    },
+    {
+        name: "Điểm trung bình giảm dần",
+        value: "vote_average.desc",
+    },
+    {
+        name: "Bình chọn tăng dần",
+        value: "vote_count.asc",
+    },
+    {
+        name: "Bình chọn giảm dần",
+        value: "vote_count.desc",
+    },
+]

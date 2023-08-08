@@ -34,8 +34,6 @@ const DetailTV: React.FC<DetailTVProps> = ({
 
   const director = cast.crew.filter((e: any) => e.job === "Director");
 
-  console.log(data)
-
   return (
     <div className="min-h-screen w-full dark">
       <div className="relative md:h-[350px] h-[300px] bg-black/40 bg-blend-overlay rounded-b-3xl overflow-hidden">

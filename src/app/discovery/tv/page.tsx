@@ -1,8 +1,10 @@
 import Discovery from '@/components/Discovery/Discovery'
 import Layout from '@/components/shared/Layout'
 import React from 'react'
-import getTrendingAll from '../../../api/getTrendingAll'
-import getGenres from '../../../api/getGenres'
+import getGenresTV from '../../../../api/getGenresTV'
+import getDiscoverTV from "../../../../api/getDiscoverTV";
+import querystring from "querystring";
+
 
 interface pageProps {
   params: {
@@ -14,12 +16,14 @@ interface pageProps {
 const page = async ({ params, searchParams }: pageProps) => {
 
   const page = searchParams.page || "1";
-  const trending = await getTrendingAll(page);
-  const genres = await getGenres();
+  const genres = await getGenresTV();
+
+  const queryString = querystring.stringify(searchParams);
+  const discover = await getDiscoverTV(queryString);
 
   return (
     <Layout>
-        <Discovery data={trending} genres={genres}/>
+        <Discovery data={discover} genres={genres} mediatype={"tv"} title="Phim bộ"/>
     </Layout>
   )
 }
