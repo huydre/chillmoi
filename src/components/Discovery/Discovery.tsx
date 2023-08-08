@@ -77,7 +77,7 @@ const Discovery = ({ data, genres }: any) => {
         </div>
 
         {/* Desktop Catalog  */}
-        <div className="absolute w-full -bottom-6 md:flex justify-center flex">
+        <div className="absolute w-full -bottom-6 md:flex justify-center flex text-white">
           <div className=" bg-gray-900 md:py-6 md:px-9 py-3 px-4 rounded-2xl flex space-x-8">
             <ul className="flex space-x-2 md:space-x-6 items-center">
               <li>
