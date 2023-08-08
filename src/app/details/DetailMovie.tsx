@@ -34,7 +34,7 @@ const DetailMovie: React.FC<DetailMovieProps> = ({
         <div className="absolute inset-0 bg-gradient-to-t from-transparent z-10 to-black/40 bottom-1/3"></div>
         <Image
           fill
-          src={`https://image.tmdb.org/t/p/w500${data.backdrop_path}`}
+          src={`https://image.tmdb.org/t/p/original${data.backdrop_path}`}
           alt={""}
           style={{
             objectFit: "cover",

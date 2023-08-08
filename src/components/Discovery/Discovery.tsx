@@ -6,13 +6,16 @@ import {
   Popover,
   PopoverTrigger,
   PopoverContent,
-  Divider
+  Divider,
+  RadioGroup,
+  Radio,
 } from "@nextui-org/react";
 import Image from "next/image";
 import { AiOutlinePlus } from "react-icons/ai";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Select, Option } from "@material-tailwind/react";
+import { FiSearch } from "react-icons/fi";
 
 const Discovery = ({ data, genres }: any) => {
   const router = useRouter();
@@ -39,7 +42,7 @@ const Discovery = ({ data, genres }: any) => {
   let yearsArray = [];
 
   // Sử dụng vòng lặp để thêm các số từ 1980 đến 2023 vào mảng
-  for (let year = 1960; year <= 2023; year++) {
+  for (let year = 2023; year >= 1980; year--) {
     yearsArray.push(year);
   }
 
@@ -51,8 +54,8 @@ const Discovery = ({ data, genres }: any) => {
   console.log(genres);
 
   return (
-    <div className="min-h-screen 2xl:px-[100px] px-4 dark">
-      <div className="relative bg-blue-500 h-[320px]">
+    <div className="min-h-screen 2xl:px-[100px] dark">
+      <div className="relative h-[320px]">
         <Image
           src={"/discovey_banner.jpg"}
           alt="banner"
@@ -73,22 +76,23 @@ const Discovery = ({ data, genres }: any) => {
           </p>
         </div>
 
-        <div className="absolute w-full -bottom-6 flex justify-center">
-          <div className=" bg-gray-900 py-6 px-9 rounded-2xl flex space-x-8">
-            <ul className="flex space-x-6 items-center">
+        {/* Desktop Catalog  */}
+        <div className="absolute w-full -bottom-6 md:flex justify-center flex">
+          <div className=" bg-gray-900 md:py-6 md:px-9 py-3 px-4 rounded-2xl flex space-x-8">
+            <ul className="flex space-x-2 md:space-x-6 items-center">
               <li>
                 <Popover placement="bottom">
                   <PopoverTrigger>
                     {/* <Button>Thể loại</Button> */}
                     <div className="cursor-pointer">
                       <p className="text-xs text-gray-400">Thể loại</p>
-                      <p className="font-semibold truncate w-[100px]">
+                      <p className="font-semibold text-sm truncate w-[60px] md:w-[100px]">
                         {selectGenres.name}
                       </p>
                     </div>
                   </PopoverTrigger>
-                  <PopoverContent className="bg-gray-900 h-[360px] overflow-y-auto pt-14">
-                    <ul className="">
+                  <PopoverContent className="bg-gray-900 ">
+                    <ul className="h-[360px] overflow-y-auto ">
                       {genres.genres.map((genre: any) => (
                         <li>
                           <div
@@ -114,8 +118,10 @@ const Discovery = ({ data, genres }: any) => {
                 <Popover placement="bottom">
                   <PopoverTrigger>
                     <div className="cursor-pointer">
-                      <p className="text-xs text-gray-400">Định dạng</p>
-                      <p className="font-semibold truncate w-[100px]">
+                      <p className="text-xs text-gray-400 truncate">
+                        Định dạng
+                      </p>
+                      <p className="font-semibold text-sm truncate">
                         {(selectFormat === "movie" && "Phim lẻ") ||
                           (selectFormat === "tv" && "Phim bộ") ||
                           selectFormat}
@@ -163,13 +169,13 @@ const Discovery = ({ data, genres }: any) => {
                     {/* <Button>Thể loại</Button> */}
                     <div className="cursor-pointer">
                       <p className="text-xs text-gray-400">Năm</p>
-                      <p className="font-semibold truncate w-[100px]">
+                      <p className="font-semibold text-sm truncate w-[50px]">
                         {selectYear}
                       </p>
                     </div>
                   </PopoverTrigger>
-                  <PopoverContent className="bg-gray-900 h-[360px] overflow-y-auto pt-20">
-                    <ul className="">
+                  <PopoverContent className="bg-gray-900 ">
+                    <ul className="h-[360px] overflow-y-scroll">
                       {yearsArray.map((i: any) => (
                         <li>
                           <div
@@ -191,25 +197,22 @@ const Discovery = ({ data, genres }: any) => {
                 </Popover>
               </li>
             </ul>
-            <div>
+            <div className="hidden md:block">
               <Button color="primary">Tìm kiếm</Button>
+            </div>
+            <div className="w-min md:hidden">
+              <Button isIconOnly color="primary">
+                <FiSearch size="1.5em" />
+              </Button>
             </div>
           </div>
         </div>
       </div>
 
-      {/* <div className="md:flex justify-between items-center my-3">
-        <h3>Khám phá</h3>
-        <div className="flex space-x-2">
-          <div>sắp xếp theo</div>
-          <div>Lọc</div>
-        </div>
-      </div> */}
-
-      <div className="md:grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-8 pt-24 hidden">
+      <div className="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-8 md:pt-24 pt-10 px-4">
         {data.results.map((i: any) => (
           <Link href={`details/${i.media_type}/${i.id}/${i.title || i.name}`}>
-            <div className="relative max-w-[230px] h-[345px] bg-blue-500">
+            <div className="relative max-w-[230px] h-[345px]">
               <Image
                 src={`https://image.tmdb.org/t/p/w500${i.poster_path}`}
                 fill
@@ -241,7 +244,7 @@ const Discovery = ({ data, genres }: any) => {
         ))}
       </div>
 
-      <div className="w-full flex justify-center mt-6">
+      <div className="w-full flex justify-center mt-6 px-4">
         <Pagination
           showControls
           total={data.total_pages}
