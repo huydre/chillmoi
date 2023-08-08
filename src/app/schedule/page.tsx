@@ -4,7 +4,9 @@ import React from 'react'
 const page = () => {
   return (
     <Layout>
-        Schedule
+        <div className='h-screen text-center'>
+            <h1>Chưa code đến phần này :3</h1>
+        </div>
     </Layout>
   )
 }

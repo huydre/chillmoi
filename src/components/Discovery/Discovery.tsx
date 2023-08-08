@@ -71,8 +71,6 @@ const Discovery = ({ data, genres, mediatype, title }: any) => {
     router.push(`${pathname}${query}`);
   };
 
-  console.log(genres)
-
 
   return (
     <div className="min-h-screen dark">
@@ -251,7 +249,7 @@ const Discovery = ({ data, genres, mediatype, title }: any) => {
       <div className="w-full flex justify-center mt-6 px-4 2xl:px-[100px]">
         <Pagination
           showControls
-          total={data.total_pages}
+          total={data.total_pages > 500 ? 500 : data.total_pages}
           initialPage={Number(searchParams.get("page")) || 1}
           onChange={handlePagination}
         />
