@@ -1,7 +1,7 @@
 import Discovery from "@/components/Discovery/Discovery";
 import Layout from "@/components/shared/Layout";
 import React from "react";
-import getGenresMovie from "../../../../api/getGenresMovie";
+import getGenresMovie from "../../../../api/getGenres";
 import querystring from "querystring";
 import getDiscoverMovie from "../../../../api/getDiscoverMovie";
 
