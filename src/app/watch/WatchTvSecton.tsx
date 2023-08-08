@@ -3,6 +3,7 @@ import Recommendation from "@/components/shared/Recommendation";
 import React from "react";
 import { useSearchParams } from "next/navigation";
 import SeasonAndEpisode from "@/components/shared/SeasonAndEpisode";
+import Comment from "@/components/shared/Comment";
 
 export interface WatchSectionProps {
   id: string;
@@ -10,6 +11,8 @@ export interface WatchSectionProps {
   recommend: any;
   episodeDetails: any;
   seasonsDetails: any;
+  reviews: any;
+  similar: any;
 }
 
 const WatchTvSection = ({
@@ -18,6 +21,8 @@ const WatchTvSection = ({
   recommend,
   episodeDetails,
   seasonsDetails,
+  reviews,
+  similar,
 }: WatchSectionProps) => {
   const searchParams = useSearchParams();
   const season = Number(searchParams.get("season")) + 1;
@@ -50,12 +55,34 @@ const WatchTvSection = ({
 
         <SeasonAndEpisode data={data} seasonDetail={seasonsDetails} />
 
+
+          {/* Similar  */}
+          <Recommendation
+            data={similar.results}
+            title="Nôi dung tương tự"
+            mediatype={"movie"}
+          />
+
         <Recommendation
           data={recommend.results}
           title="Có thể bạn cũng thích"
           mediatype={"movie"}
         />
+
+        {/* Review  */}
+        <div>
+          <h3 className="py-4 pt-10">Bình luận</h3>
+          <div className="space-y-8">
+            { !reviews.total_results ?
+            <p className="pb-3 text-sm italic">Chưa có bình luận</p>
+            :
+            reviews.results.map((i: any) => (
+              <Comment data={i} />
+            ))}
+          </div>
+        </div>
       </div>
+
     </div>
   );
 };
