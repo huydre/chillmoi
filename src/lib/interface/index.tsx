@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 
 export interface LastestUpdateInterface {
+  release_date: ReactNode;
   id: string;
   results: any;
   genres_ids: any;

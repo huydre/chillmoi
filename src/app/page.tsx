@@ -14,7 +14,7 @@ export default function Home() {
       <SwiperHeroSection />
       <LastestUpdateSection />
       <PopularSection />
-      <Upcomming />
+      {/* <Upcomming /> */}
     </Layout>
   );
 }

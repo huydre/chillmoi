@@ -20,7 +20,7 @@ const UpcommingSwiper = ({
   mediatype?: string;
 }) => {
   const swiperRef = useRef<SwiperCore | null>(null);
-
+    console.log(data)
   return (
     <div className="py-4 px-2">
       <div className="flex justify-between">
@@ -53,7 +53,6 @@ const UpcommingSwiper = ({
           freeMode={true}
           modules={[FreeMode]}
           slidesPerView={"auto"}
-          slidesPerGroup={1}
           breakpoints={{
             1536: {
               slidesPerView: 4,
@@ -68,12 +67,11 @@ const UpcommingSwiper = ({
               spaceBetween: 20,
             },
             768: {
-              slidesPerView: 1,
+              slidesPerView: 2,
               spaceBetween: 20,
             },
             0: {
               slidesPerView: 1,
-              slidesPerGroup: 1,
               spaceBetween: 10,
             },
           }}
@@ -97,9 +95,15 @@ const UpcommingSwiper = ({
                     }}
                   />
 
+                  <div className="absolute left-0 w-14 blur-xs h-full text-center pt-2 bg-black/30">
+                    <p className="text-primary font-bold text-xs">THG {i.release_date?.toString()?.slice(5,7)}</p>
+                    <p className="text-3xl font-bold">{i.release_date?.toString()?.slice(8,10)}</p>
+                  </div>
+
                   <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/80 top-1/3"></div>
 
-                  <div className="w-full absolute bottom-0 p-2 space-y-1">
+
+                  <div className="w-full absolute bottom-0 p-2 space-y-1 pl-16">
                     <p className="text-base line-clamp-1 font-semibold text-gray-300">
                       {i.title || i.name}
                     </p>
