@@ -7,6 +7,7 @@ import PopularSection from "@/components/Home/PopularSection";
 import Layout from "@/components/shared/Layout";
 import SwiperHeroSection from "@/components/Home/SwiperHeroSection";
 import Upcomming from "@/components/Home/Upcomming";
+import TopRatedSection from "@/components/Home/TopRatedSection";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <SwiperHeroSection />
       <LastestUpdateSection />
       <PopularSection />
+      <TopRatedSection/>
       {/* <Upcomming /> */}
     </Layout>
   );
