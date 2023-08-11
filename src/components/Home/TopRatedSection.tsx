@@ -5,6 +5,6 @@ import LastestUpdate from '../shared/LastestUpdate';
 export default async function TopRatedSection() {
     const data = await getTopRatedTV();
   return (
-    <LastestUpdate data={data} title='Chương trình truyền hình được giới chuyên môn đánh giá cao' mediatype='tv' />
+    <LastestUpdate data={data} title='Chương trình được đánh giá cao' mediatype='tv' />
   )
 }
