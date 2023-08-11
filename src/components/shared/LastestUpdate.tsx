@@ -1,6 +1,8 @@
 "use client";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Image from "next/image";
+import "swiper/css/free-mode";
+import { FreeMode} from "swiper/modules";
 import { AiOutlinePlus } from "react-icons/ai";
 import ArrowRight from "@/lib/icon/ArrowRight";
 import SwiperCore from "swiper/core";
@@ -46,8 +48,11 @@ const LastestUpdate = ({
           onSwiper={(swiper) => {
             swiperRef.current = swiper;
           }}
-          speed={400}
+          speed={500}
+          freeMode={true}
+          modules={[FreeMode]}
           slidesPerView={"auto"}
+          slidesPerGroup={1}
           breakpoints={{
             1536: {
               slidesPerView: 6,
@@ -72,7 +77,7 @@ const LastestUpdate = ({
             },
           }}
         >
-          {data.results.slice(0,10).map((i: LastestUpdateInterface) => (
+          {data.results.map((i: LastestUpdateInterface) => (
             <SwiperSlide>
               <div className="relative max-w-[230px] h-[345px] cursor-pointer rounded-2xl overflow-hidden">
                 <a
