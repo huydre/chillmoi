@@ -2,6 +2,7 @@
 import Recommendation from "@/components/shared/Recommendation";
 import React from "react";
 import Comment from "@/components/shared/Comment";
+import { Tabs, Tab } from "@nextui-org/react";
 
 export interface WatchSectionProps {
   id: string;
@@ -11,17 +12,52 @@ export interface WatchSectionProps {
   similar: any;
 }
 
-const WatchMovieSection = ({ id, data, recommend, reviews, similar }: WatchSectionProps) => {
+const WatchMovieSection = ({
+  id,
+  data,
+  recommend,
+  reviews,
+  similar,
+}: WatchSectionProps) => {
+  const server = [
+    {
+      id: 1,
+      label: "Server 1",
+      url: `https://multiembed.mov/directstream.php?video_id=${id}&tmdb=1`,
+    },
+    {
+      id: 2,
+      label: "Server 2",
+      url: `https://autoembed.to/movie/tmdb/${id}?server=3`,
+    },
+  ];
+
   return (
-    <div className="min-h-screen pt-[70px]">
-      <iframe
+    <div className="min-h-screen pt-[70px] dark">
+      <div>
+        <Tabs className="pl-4" color="primary" aria-label="Dynamic tabs" items={server}>
+          {(item) => (
+            <Tab key={item.id} title={item.label}>
+              <iframe
+                src={item.url}
+                width="100%"
+                height="100%"
+                frameBorder="0"
+                allowFullScreen
+                className="w-full aspect-video sm: pr-4 pl-4 pt-4"
+              />
+            </Tab>
+          )}
+        </Tabs>
+      </div>
+      {/* <iframe
         src={`https://autoembed.to/movie/tmdb/${id}?server=3`}
         width="100%"
         height="100%"
         frameBorder="0"
         allowFullScreen
         className="w-full aspect-video sm: pr-4 pl-4"
-      />
+      /> */}
       {/* <iframe 
         src={`https://multiembed.mov/directstream.php?video_id=${id}&tmdb=1`}
         width="100%"
@@ -38,12 +74,12 @@ const WatchMovieSection = ({ id, data, recommend, reviews, similar }: WatchSecti
         </p>
         <p className="line-clamp-3 text-gray-400">{data.overview}</p>
 
-          {/* Similar  */}
-          <Recommendation
-            data={similar.results}
-            title="Nôi dung tương tự"
-            mediatype={"movie"}
-          />
+        {/* Similar  */}
+        <Recommendation
+          data={similar.results}
+          title="Nôi dung tương tự"
+          mediatype={"movie"}
+        />
 
         <Recommendation
           data={recommend.results}
@@ -55,15 +91,13 @@ const WatchMovieSection = ({ id, data, recommend, reviews, similar }: WatchSecti
         <div>
           <h3 className="py-4 pt-10">Bình luận</h3>
           <div className="space-y-8">
-            { !reviews.total_results ?
-            <p className="pb-3 text-sm italic">Chưa có bình luận</p>
-            :
-            reviews.results.map((i: any) => (
-              <Comment data={i} />
-            ))}
+            {!reviews.total_results ? (
+              <p className="pb-3 text-sm italic">Chưa có bình luận</p>
+            ) : (
+              reviews.results.map((i: any) => <Comment data={i} />)
+            )}
           </div>
         </div>
-
       </div>
     </div>
   );
