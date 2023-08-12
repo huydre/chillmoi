@@ -11,6 +11,7 @@ import { AiOutlinePlus, AiOutlineRight, AiOutlineLeft } from "react-icons/ai";
 import SwiperCore from "swiper/core";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import Arrow from "@/lib/icon/Arrow";
+import { Genres } from "@/constant";
 
 export interface SwiperHeroProps {
   data: any;
@@ -35,7 +36,6 @@ const SwiperHero = ({ data }: SwiperHeroProps) => {
     if (indexSlide === data.length) return 0;
     return Number(indexSlide);
   };
-
 
   return (
     <div className="w-[calc(100% - 74px)]">
@@ -128,74 +128,83 @@ const SwiperHero = ({ data }: SwiperHeroProps) => {
           </a>
         </div>
 
-          <div className="absolute top-[200px] z-10 mx-[124px] lg:grid grid-cols-4 2xl:w-[70%] w-[80%] hidden">
-            <div className="space-y-8 col-span-3">
-              <h1 className="line-clamp-2 leading-tight">
-                {heroData.title || heroData.name}
-              </h1>
-              <div className="flex items-center space-x-8">
-                <div className="flex items-center space-x-2">
-                  <a
-                    href={`details/${heroData.media_type}/${heroData.id}/${
-                      heroData.title || heroData.name
-                    }`}
-                    className="bg-primary p-3 rounded-full text-black"
-                  >
-                    <FaPlay size="1em" />
-                  </a>
-                  <h6 className="text-md">Xem ngay</h6>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <button className="bg-white p-3 rounded-full text-black">
-                    <AiOutlinePlus />
-                  </button>
-                  <h6 className="text-md">Danh sách</h6>
-                </div>
+        <div className="absolute top-[200px] z-10 mx-[124px] lg:grid grid-cols-4 2xl:w-[70%] w-[80%] hidden">
+          <div className="space-y-8 col-span-3">
+            <h1 className="line-clamp-2 leading-tight">
+              {heroData.title || heroData.name}
+            </h1>
+            <div className="flex items-center space-x-8">
+              <div className="flex items-center space-x-2">
+                <a
+                  href={`details/${heroData.media_type}/${heroData.id}/${
+                    heroData.title || heroData.name
+                  }`}
+                  className="bg-primary p-3 rounded-full text-black"
+                >
+                  <FaPlay size="1em" />
+                </a>
+                <h6 className="text-md">Xem ngay</h6>
               </div>
-              <div className="xl:flex space-x-12 pt-6 hidden">
-                <div>
-                  <h5 className="text-[1rem]">Năm</h5>
-                  <h6>
-                    {heroData.release_date?.slice(0, 4) ||
-                      heroData.first_air_date?.slice(0, 4)}
-                  </h6>
-                </div>
-                <div>
-                  <h5 className="text-[1rem]">Loại</h5>
-                  <h6>{heroData.media_type === "movie" ? "Phim lẻ" : "Phim bộ"}</h6>
-                </div>
-                <div>
-                  <h5 className="text-[1rem]">Thể loại</h5>
-                  <h6>{heroData.genres}</h6>
-                </div>
+              <div className="flex items-center space-x-2">
+                <button className="bg-white p-3 rounded-full text-black">
+                  <AiOutlinePlus />
+                </button>
+                <h6 className="text-md">Danh sách</h6>
               </div>
             </div>
-
-            <div className="space-y-8 xl:flex flex-col hidden">
-              <div className="flex space-x-4 items-center">
-                <h4>0{indexSlide}</h4>
-                <div className="h-[2px] bg-white w-12" />
-                <h4>0{data.length}</h4>
+            <div className="xl:flex space-x-12 pt-6 hidden">
+              <div>
+                <h5 className="text-[0.9rem]">Năm</h5>
+                <h6 className="text-[1rem]">
+                  {heroData.release_date?.slice(0, 4) ||
+                    heroData.first_air_date?.slice(0, 4)}
+                </h6>
               </div>
-              <div className="w-[300px] line-clamp-3">{heroData.overview}</div>
-              <div className="flex items-center space-x-4 pt-8">
-                <button
-                  onClick={() => {
-                    swiperRef.current?.slidePrev();
-                  }}
-                >
-                  <AiOutlineLeft size="2em" />
-                </button>
-                <button
-                  onClick={() => {
-                    swiperRef.current?.slideNext();
-                  }}
-                >
-                  <AiOutlineRight size="2em" />
-                </button>
+              <div>
+                <h5 className="text-[0.9rem]">Loại</h5>
+                <h6 className="text-[1rem]">
+                  {heroData.media_type === "movie" ? "Phim lẻ" : "Phim bộ"}
+                </h6>
+              </div>
+              <div>
+                <h5 className="text-[0.9rem]">Thể loại</h5>
+                <h6 className="text-[1rem] line-clamp-1">
+                  {heroData.genre_ids
+                    ?.map(
+                      (id: number) =>
+                        Genres.find((item) => item.id === id)?.name
+                    )
+                    .join(", ")}
+                </h6>
               </div>
             </div>
           </div>
+
+          <div className="space-y-8 xl:flex flex-col hidden">
+            <div className="flex space-x-4 items-center">
+              <h4>0{indexSlide}</h4>
+              <div className="h-[2px] bg-white w-12" />
+              <h4>0{data.length}</h4>
+            </div>
+            <div className="w-[300px] line-clamp-3">{heroData.overview}</div>
+            <div className="flex items-center space-x-4 pt-8">
+              <button
+                onClick={() => {
+                  swiperRef.current?.slidePrev();
+                }}
+              >
+                <AiOutlineLeft size="2em" />
+              </button>
+              <button
+                onClick={() => {
+                  swiperRef.current?.slideNext();
+                }}
+              >
+                <AiOutlineRight size="2em" />
+              </button>
+            </div>
+          </div>
+        </div>
         <aside className="absolute bg-[#0E0E10] lg:w-[420px] flex right-0 -translate-y-[169px] z-20 2xl:right-[154px] items-center lg:rounded-tl-xl w-full md:pl-[74px] lg:pl-0">
           <div className="px-[40px] w-full space-y-2">
             <h5 className="text-sm uppercase text-gray-400">Tiếp theo</h5>

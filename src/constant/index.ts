@@ -29,63 +29,63 @@ export const sortBy = [
 export const Genres = [
     {
         "id": 28,
-        "name": "Phim Hành Động"
+        "name": "Hành Động"
     },
     {
         "id": 12,
-        "name": "Phim Phiêu Lưu"
+        "name": "Phiêu Lưu"
     },
     {
         "id": 16,
-        "name": "Phim Hoạt Hình"
+        "name": "Hoạt Hình"
     },
     {
         "id": 35,
-        "name": "Phim Hài"
+        "name": "Hài"
     },
     {
         "id": 80,
-        "name": "Phim Hình Sự"
+        "name": "Hình Sự"
     },
     {
         "id": 99,
-        "name": "Phim Tài Liệu"
+        "name": "Tài Liệu"
     },
     {
         "id": 18,
-        "name": "Phim Chính Kịch"
+        "name": "Chính Kịch"
     },
     {
         "id": 10751,
-        "name": "Phim Gia Đình"
+        "name": "Gia Đình"
     },
     {
         "id": 14,
-        "name": "Phim Giả Tượng"
+        "name": "Giả Tượng"
     },
     {
         "id": 36,
-        "name": "Phim Lịch Sử"
+        "name": "Lịch Sử"
     },
     {
         "id": 27,
-        "name": "Phim Kinh Dị"
+        "name": "Kinh Dị"
     },
     {
         "id": 10402,
-        "name": "Phim Nhạc"
+        "name": "Nhạc"
     },
     {
         "id": 9648,
-        "name": "Phim Bí Ẩn"
+        "name": "Bí Ẩn"
     },
     {
         "id": 10749,
-        "name": "Phim Lãng Mạn"
+        "name": "Lãng Mạn"
     },
     {
         "id": 878,
-        "name": "Phim Khoa Học Viễn Tưởng"
+        "name": "Khoa Học Viễn Tưởng"
     },
     {
         "id": 10770,
@@ -93,15 +93,15 @@ export const Genres = [
     },
     {
         "id": 53,
-        "name": "Phim Gây Cấn"
+        "name": "Gây Cấn"
     },
     {
         "id": 10752,
-        "name": "Phim Chiến Tranh"
+        "name": "Chiến Tranh"
     },
     {
         "id": 37,
-        "name": "Phim Miền Tây"
+        "name": "Miền Tây"
     },
     {
         "id": 10759,
@@ -109,27 +109,27 @@ export const Genres = [
     },
     {
         "id": 16,
-        "name": "Phim Hoạt Hình"
+        "name": "Hoạt Hình"
     },
     {
         "id": 35,
-        "name": "Phim Hài"
+        "name": "Hài"
     },
     {
         "id": 80,
-        "name": "Phim Hình Sự"
+        "name": "Hình Sự"
     },
     {
         "id": 99,
-        "name": "Phim Tài Liệu"
+        "name": "Tài Liệu"
     },
     {
         "id": 18,
-        "name": "Phim Chính Kịch"
+        "name": "Chính Kịch"
     },
     {
         "id": 10751,
-        "name": "Phim Gia Đình"
+        "name": "Gia Đình"
     },
     {
         "id": 10762,
@@ -137,7 +137,7 @@ export const Genres = [
     },
     {
         "id": 9648,
-        "name": "Phim Bí Ẩn"
+        "name": "Bí Ẩn"
     },
     {
         "id": 10763,
