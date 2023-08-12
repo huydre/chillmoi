@@ -13,7 +13,7 @@ import { AiOutlinePlus } from "react-icons/ai";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { FiSearch } from "react-icons/fi";
-import { sortBy } from "@/constant";
+import { Genres, sortBy } from "@/constant";
 
 const Discovery = ({ data, genres, mediatype, title }: any) => {
   const router = useRouter();
@@ -137,7 +137,7 @@ const Discovery = ({ data, genres, mediatype, title }: any) => {
                 <Popover placement="bottom">
                   <PopoverTrigger>
                     <div className="cursor-pointer">
-                      <p className="text-xs text-gray-400 truncate">Sắp xếp</p>
+                      <p className="text-xs text-gray-400 truncate">Sắp xếp theo</p>
                       <p className="font-semibold text-sm truncate max-w-[70px] md:max-w-full">
                         {selectSort.name}
                       </p>
@@ -230,11 +230,18 @@ const Discovery = ({ data, genres, mediatype, title }: any) => {
                   {i.title || i.name}
                 </p>
                 <div className="flex space-x-2 text-[0.8rem] font-medium">
-                  <p className="text-primary capitalize font-semibold">
+                  <p className="text-primary capitalize font-semibold whitespace-nowrap">
                     {mediatype === "movie" ? "Phim lẻ" : "Phim bộ"}
                   </p>
                   <span>-</span>
-                  <p className="text-gray-500 truncate"></p>
+                  <p className="text-gray-500 truncate">
+                      {i.genre_ids
+                        ?.map(
+                          (id: number) =>
+                            Genres.find((item) => item.id === id)?.name
+                        )
+                        .join(", ")}
+                    </p>
                 </div>
               </div>
 

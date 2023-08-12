@@ -4,7 +4,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import Link from "next/link";
-import { useRouter } from 'next/navigation'
+import { useRouter } from "next/navigation";
+import { Genres } from "@/constant";
 
 export interface RecommendationProps {
   data: any;
@@ -51,7 +52,11 @@ export default function Recommendation({
       >
         {data.map((recom: any) => (
           <SwiperSlide>
-            <Link href={`/details/${recom.media_type || mediatype}/${recom.id}/${recom.title || recom.name}`}>
+            <Link
+              href={`/details/${recom.media_type || mediatype}/${recom.id}/${
+                recom.title || recom.name
+              }`}
+            >
               <div className="relative max-w-[186px] h-[279px] cursor-pointer rounded-2xl overflow-hidden">
                 <Image
                   fill
@@ -69,11 +74,18 @@ export default function Recommendation({
                     {recom.title || recom.name}
                   </p>
                   <div className="flex space-x-2 text-[0.8rem] font-medium">
-                    <p className="text-primary capitalize font-semibold">
+                    <p className="text-primary capitalize font-semibold whitespace-nowrap">
                       {mediatype === "tv" ? "Phim bộ" : "Phim lẻ"}
                     </p>
                     <span>-</span>
-                    <p className="text-gray-500 truncate"></p>
+                    <p className="text-gray-500 truncate">
+                      {recom.genre_ids
+                        ?.map(
+                          (id: number) =>
+                            Genres.find((item) => item.id === id)?.name
+                        )
+                        .join(", ")}
+                    </p>
                   </div>
                 </div>
               </div>
