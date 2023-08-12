@@ -18,8 +18,11 @@ export default function SeasonAndEpisode({
   const searchParams = useSearchParams();
 
   const [seasons, setSeasons] = useState(
-    Number(searchParams.get("season")) || 0
+    Number(searchParams.get("season")) || Number(seasonDetail[0].season_number) || 0
   );
+
+  // console.log(seasonDetail)
+
 
   return (
     <div className="my-4 pt-4">

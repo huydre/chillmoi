@@ -37,7 +37,7 @@ const Page = async ({ params, searchParams }: pageProps) => {
   const promises =
     mediatype === "tv" &&
     details.seasons.map((season: any, index: number) =>
-      getDetailsSeasons(id, index)
+      getDetailsSeasons(id, season.season_number)
     );
   const seasonsDetails = mediatype === "tv" && (await Promise.all(promises));
 

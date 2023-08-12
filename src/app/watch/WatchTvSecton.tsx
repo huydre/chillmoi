@@ -26,7 +26,7 @@ const WatchTvSection = ({
   similar,
 }: WatchSectionProps) => {
   const searchParams = useSearchParams();
-  const season = Number(searchParams.get("season")) + 1;
+  const season = seasonsDetails[0].season_number == 1 ? Number(searchParams.get("season")) : Number(searchParams.get("season")) + 1;
   const server = [
     {
       id: 1,
@@ -58,25 +58,15 @@ const WatchTvSection = ({
           )}
         </Tabs>
       </div>
-      {/* <iframe
-        src={`https://autoembed.to/tv/tmdb/${id}-${season}-${searchParams.get(
-          "episode"
-        )}?server=3`}
-        width="100%"
-        height="100%"
-        frameBorder="0"
-        allowFullScreen
-        className="w-full aspect-video sm: pr-4 pl-4"
-      /> */}
       <div className="space-y-4 pt-8 xl:px-32 px-4">
         <h3>{data.name}</h3>
         <h5>
           {data.seasons[season - 1].name} - {episodeDetails.name}
         </h5>
         <p className="text-gray-200">
-          Phát hành vào ngày {episodeDetails.air_date.slice(8, 10)} tháng{" "}
-          {episodeDetails.air_date.slice(5, 7)} năm{" "}
-          {episodeDetails.air_date.slice(0, 4)}
+          Phát hành vào ngày {episodeDetails.air_date?.slice(8, 10)} tháng{" "}
+          {episodeDetails.air_date?.slice(5, 7)} năm{" "}
+          {episodeDetails.air_date?.slice(0, 4)}
         </p>
         <p className="line-clamp-3 text-gray-400">
           {episodeDetails.overview || data.overview}

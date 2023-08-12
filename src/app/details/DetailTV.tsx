@@ -33,6 +33,7 @@ const DetailTV: React.FC<DetailTVProps> = ({
 }) => {
 
   const director = cast.crew.filter((e: any) => e.job === "Director");
+  console.log(seasonDetail)
 
   return (
     <div className="min-h-screen w-full dark">
@@ -110,7 +111,7 @@ const DetailTV: React.FC<DetailTVProps> = ({
 
                 <div className="flex space-x-8">
                   <a
-                    href={`/watch/tv/${data.id}/${data.name}?season=0&episode=1`}
+                    href={`/watch/tv/${data.id}/${data.name}?season=${seasonDetail[0].season_number}&episode=1`}
                     className="ring-2 ring-primary bg-primary text-sm font-semibold px-4 py-2 rounded-full  transition duration-200 ease-in-out flex space-x-2 items-center"
                   >
                     <BsFillPlayFill />

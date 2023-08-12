@@ -11,8 +11,8 @@ export default function PosterCard({
       <a
         href={
           mediatype
-            ? `details/${mediatype}/${data.id}/${data.title}`
-            : `details/${data.media_type}/${data.id}/${data.title}`
+            ? `details/${mediatype}/${data.id}/${data.title || data.name}`
+            : `details/${data.media_type}/${data.id}/${data.title || data.name}`
         }
       >
         <Image
